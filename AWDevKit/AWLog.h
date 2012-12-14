@@ -63,7 +63,7 @@ do {\
 #define AWLogTmp3(v1, v2, v3) AWLogTmp(3, v1) AWLogTmp2(v2, v3)
 #define AWLogTmp2(v1, v2) AWLogTmp(2, v1) AWLogTmp1(v2)
 #define AWLogTmp1(v1) AWLogTmp(1, v1)
-#define AWLogTmp(n, v) __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v;
+#define AWLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_1 = &__tmp_val_1;
 
 #define AWLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) AWLogVal(8, v1), AWLogVal7(v2, v3, v4, v5, v6, v7, v8)
 #define AWLogVal7(v1, v2, v3, v4, v5, v6, v7) AWLogVal(7, v1), AWLogVal6(v2, v3, v4, v5, v6, v7)
@@ -75,30 +75,30 @@ do {\
 #define AWLogVal1(v1) AWLogVal(1, v1)
 
 #define AWLogVal(n, v)\
-((@encode(__typeof(v))[0] == '@') ? [NSString stringWithFormat:@"%s %@", #v, *(id *)&__tmp_val_ ## n]\
-: ((@encode(__typeof(v))[0] == '#') ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromClass(*(Class *)&__tmp_val_ ## n)]\
-: ((@encode(__typeof(v))[0] == ':') ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromSelector(*(SEL *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), CGSize) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGSize(*(CGSize *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), CGPoint) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGPoint(*(CGPoint *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), CGRect) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGRect(*(CGRect *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), NSRange) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromRange(*(NSRange *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), UIEdgeInsets) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromUIEdgeInsets(*(UIEdgeInsets *)&__tmp_val_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), NSUInteger) ? [NSString stringWithFormat:@"%s %u", #v, *(NSUInteger *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %d", #v, *(NSInteger *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), CGFloat) ? [NSString stringWithFormat:@"%s %f", #v, *(CGFloat *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), int) ? [NSString stringWithFormat:@"%s %d", #v, *(int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), uint) ? [NSString stringWithFormat:@"%s %u", #v, *(uint *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), char) ? [NSString stringWithFormat:@"%s %c", #v, *(char *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), unsigned int) ? [NSString stringWithFormat:@"%s %u", #v, *(unsigned int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), long int) ? [NSString stringWithFormat:@"%s %ld", #v, *(long int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), unsigned long int) ? [NSString stringWithFormat:@"%s %lu", #v, *(unsigned long int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), long long int) ? [NSString stringWithFormat:@"%s %llu", #v, *(long long int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), unsigned long long int) ? [NSString stringWithFormat:@"%s %llu", #v, *(unsigned long long int *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), float) ? [NSString stringWithFormat:@"%s %f", #v, *(float *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), double) ? [NSString stringWithFormat:@"%s %f", #v, *(double *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), long double) ? [NSString stringWithFormat:@"%s %Lf", #v, *(long double *)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), void *) ? [NSString stringWithFormat:@"%s %p", #v, *(void **)&__tmp_val_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)&__tmp_val_ ## n) ? @"YES" : @"NO")]\
+(__builtin_types_compatible_p(__typeof(v), id) ? [NSString stringWithFormat:@"%s %@", #v, *(const id *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), Class) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromClass(*(Class *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), SEL) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromSelector(*(SEL *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), CGSize) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGSize(*(CGSize *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), CGPoint) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGPoint(*(CGPoint *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), CGRect) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGRect(*(CGRect *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), NSRange) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromRange(*(NSRange *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), UIEdgeInsets) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromUIEdgeInsets(*(UIEdgeInsets *)__tmp_val_ptr_ ## n)]\
+: (__builtin_types_compatible_p(__typeof(v), NSUInteger) ? [NSString stringWithFormat:@"%s %u", #v, *(NSUInteger *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %d", #v, *(NSInteger *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), CGFloat) ? [NSString stringWithFormat:@"%s %f", #v, *(CGFloat *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), int) ? [NSString stringWithFormat:@"%s %d", #v, *(int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), uint) ? [NSString stringWithFormat:@"%s %u", #v, *(uint *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), char) ? [NSString stringWithFormat:@"%s %c", #v, *(char *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unsigned int) ? [NSString stringWithFormat:@"%s %u", #v, *(unsigned int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), long int) ? [NSString stringWithFormat:@"%s %ld", #v, *(long int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unsigned long int) ? [NSString stringWithFormat:@"%s %lu", #v, *(unsigned long int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), long long int) ? [NSString stringWithFormat:@"%s %llu", #v, *(long long int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unsigned long long int) ? [NSString stringWithFormat:@"%s %llu", #v, *(unsigned long long int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), float) ? [NSString stringWithFormat:@"%s %f", #v, *(float *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), double) ? [NSString stringWithFormat:@"%s %f", #v, *(double *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), long double) ? [NSString stringWithFormat:@"%s %Lf", #v, *(long double *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), void *) ? [NSString stringWithFormat:@"%s %p", #v, *(void **)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)__tmp_val_ptr_ ## n) ? @"YES" : @"NO")]\
 : @"__UNKNOWN__TYPE__"\
 ))))))))))))))))))))))))
 
