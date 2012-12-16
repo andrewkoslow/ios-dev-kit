@@ -1,6 +1,6 @@
 //
 //  AWAssert.h
-//  AWDevKit
+//  DevKit
 //
 //  Created by Andrew Koslow on 13.06.12.
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
