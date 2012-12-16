@@ -12,6 +12,18 @@
 @implementation NSArray (DevKit)
 
 
+- (id)firstObject {
+	id object = nil;
+	if (self.count > 0) object = self[0];
+	return object;
+}
+
+
+- (NSArray *)reversedArray {
+    return self.reverseObjectEnumerator.allObjects;
+}
+
+
 - (NSArray *)arrayByRemovingObject:(id)anObject {
 	NSMutableArray *array = [self mutableCopy];
 	[array removeObject:anObject];
@@ -33,13 +45,6 @@
 }
 
 
-- (id)firstObject {
-	id object = nil;
-	if (self.count > 0) object = self[0];
-	return object;
-}
-
-
 - (NSArray *)arrayOfObjectsOfClass:(Class)objectClass {
 	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:self.count];
 	
@@ -48,6 +53,11 @@
 	}
 	
     return [array copy];
+}
+
+
+- (NSArray *)arrayByPrependingObject:(id)anObject {
+    return [[NSArray arrayWithObject:anObject] arrayByAddingObjectsFromArray:self];
 }
 
 
