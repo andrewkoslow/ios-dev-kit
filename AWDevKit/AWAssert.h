@@ -19,8 +19,8 @@
 #define AWAssertYES(e) NSAssert(e == YES, @#e" == YES")
 #define AWAssertEquals(e1, e2) NSAssert(e1 == e2, @#e1" == "#e2)
 #define AWAssertNotEquals(e1, e2) NSAssert(e1 != e2, @#e1" != "#e2)
-#define AWAssertResponds(o, s) NSAssert1([o respondsToSelector:s], @"["#o" respondsToSelector:(%@)]", NSStringFromSelector(s))
-#define AWAssertConforms(o, p) NSAssert1([o conformsToProtocol:@protocol(p)], @"["#o" conformsToProtocol:(%@)]", NSStringFromProtocol(@protocol(p)))
+#define AWAssertResponds(o, s) NSAssert1(o == nil || [o respondsToSelector:s], @""#o" == nil || ["#o" respondsToSelector:(%@)]", NSStringFromSelector(s))
+#define AWAssertConforms(o, p) NSAssert1(o == nil || [o conformsToProtocol:@protocol(p)], @""#o" == nil || ["#o" conformsToProtocol:(%@)]", NSStringFromProtocol(@protocol(p)))
 #define AWAssertClass(o, c) NSAssert(o == nil || [o isKindOfClass:[c class]], @""#o" == nil || ["#o" isKindOfClass:["#c" class]]")
 
 
