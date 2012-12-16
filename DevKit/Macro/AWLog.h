@@ -63,7 +63,7 @@ do {\
 #define AWLogTmp3(v1, v2, v3) AWLogTmp(3, v1) AWLogTmp2(v2, v3)
 #define AWLogTmp2(v1, v2) AWLogTmp(2, v1) AWLogTmp1(v2)
 #define AWLogTmp1(v1) AWLogTmp(1, v1)
-#define AWLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_1 = &__tmp_val_1;
+#define AWLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_ ## n = &__tmp_val_ ## n;
 
 #define AWLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) AWLogVal(8, v1), AWLogVal7(v2, v3, v4, v5, v6, v7, v8)
 #define AWLogVal7(v1, v2, v3, v4, v5, v6, v7) AWLogVal(7, v1), AWLogVal6(v2, v3, v4, v5, v6, v7)
