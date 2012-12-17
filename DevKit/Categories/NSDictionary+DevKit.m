@@ -13,13 +13,6 @@
 @implementation NSDictionary (DevKit)
 
 
-- (id)dictionaryBySettingObject:(id)object forKey:(id)key {
-	NSMutableDictionary *dictionary = [self mutableCopy];
-    dictionary[key] = object;
-	return [dictionary copy];
-}
-
-
 - (id)objectOfClass:(Class)objectClass forKey:(id)key {
     id object = self[key];
     if ([object isKindOfClass:objectClass] == NO) object = nil;
@@ -55,6 +48,30 @@
 - (BOOL)boolForKey:(id)key {
     return [[self numberForKey:key] boolValue];
 }
+
+
+#pragma mark - ARC variant
+
+#if __has_feature(objc_arc)
+
+- (id)dictionaryBySettingObject:(id)object forKey:(id)key {
+	NSMutableDictionary *dictionary = [self mutableCopy];
+    dictionary[key] = object;
+	return [dictionary copy];
+}
+
+
+#pragma mark - Non-ARC variant
+
+#else
+
+- (id)dictionaryBySettingObject:(id)object forKey:(id)key {
+	NSMutableDictionary *dictionary = [[self mutableCopy] autorelease];
+    dictionary[key] = object;
+	return [NSDictionary dictionaryWithDictionary:dictionary];
+}
+
+#endif
 
 
 @end

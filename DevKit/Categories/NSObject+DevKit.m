@@ -52,7 +52,7 @@
     if (object == self) {
         NSArray *components = [keyPath componentsSeparatedByString:@"."];
         NSString *firstPart = components[0];
-        NSMutableString *proposedMethodName = [[NSMutableString alloc] initWithString:firstPart];
+        NSMutableString *proposedMethodName = [NSMutableString stringWithString:firstPart];
         
         for (NSUInteger i = 1; i < components.count; i++) {
             NSString *part = components[i];
