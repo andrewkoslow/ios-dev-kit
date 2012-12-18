@@ -13,7 +13,11 @@
 
 
 + (id)viewController {
+#if __has_feature(objc_arc)
+    return [[self alloc] initWithNibName:nil bundle:nil];
+#else
     return [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
+#endif
 }
 
 
