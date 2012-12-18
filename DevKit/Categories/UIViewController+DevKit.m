@@ -13,7 +13,11 @@
 
 
 + (id)viewControllerForCurrentInterfaceIdiom {
-    return [self viewControllerForCurrentInterfaceIdiomWithNibName:nil bundle:nil];
+    static NSString *suffix = @"Controller";
+    NSString *nibName = NSStringFromClass(self);
+    if ([nibName hasSuffix:suffix] && nibName.length > suffix.length) nibName = [nibName substringToIndex:(nibName.length - suffix.length)];
+    
+    return [self viewControllerForCurrentInterfaceIdiomWithNibName:nibName bundle:nil];
 }
 
 
