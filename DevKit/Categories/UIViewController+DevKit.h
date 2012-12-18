@@ -11,6 +11,7 @@
 
 @interface UIViewController (DevKit)
 
++ (id)viewController;
 + (id)viewControllerForCurrentInterfaceIdiom;
 + (id)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 

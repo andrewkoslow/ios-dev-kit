@@ -12,6 +12,11 @@
 @implementation UIViewController (DevKit)
 
 
++ (id)viewController {
+    return [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
+}
+
+
 + (id)viewControllerForCurrentInterfaceIdiom {
     static NSString *suffix = @"Controller";
     NSString *nibName = NSStringFromClass(self);
