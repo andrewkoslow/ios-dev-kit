@@ -11,3 +11,4 @@
 #import "NSDictionary+DevKit.h"
 #import "UINib+DevKit.h"
 #import "UIViewController+DevKit.h"
+#import "NSString+DevKit.h"
