@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+DevKit.h"
+#import "AWCommon.h"
 
 
 @implementation UIViewController (DevKit)
@@ -31,7 +32,7 @@
 
 
 + (id)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    NSString *classNameSuffix = (([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? @"Pad" : @"Phone");
+    NSString *classNameSuffix = (UIUserInterfaceIdiomIsPad ? @"Pad" : @"Phone");
     NSString *className = NSStringFromClass(self);
     className = [className stringByAppendingString:classNameSuffix];
     
