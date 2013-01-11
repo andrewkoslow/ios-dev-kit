@@ -1,13 +1,13 @@
 //
-//  AWCommon.h
+//  DKCommon.h
 //  DevKit
 //
 //  Created by Andrew Koslow on 10.01.13.
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef TVZavr_AWCommon_h
-#define TVZavr_AWCommon_h
+#ifndef DevKit_DKCommon_h
+#define DevKit_DKCommon_h
 
 
 #define UIUserInterfaceIdiomIsPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)

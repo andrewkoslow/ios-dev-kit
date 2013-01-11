@@ -1,5 +1,5 @@
 //
-//  AWCategories.h
+//  DKCategories.h
 //  DevKit
 //
 //  Created by Andrew Koslow on 16.12.12.

@@ -7,7 +7,7 @@
 //
 
 #import "NSObject+DevKit.h"
-#import "AWAssert.h"
+#import "DKAssert.h"
 
 
 @interface NSObject (DevKitPrivate)
@@ -131,7 +131,7 @@
             selector = NSSelectorFromString(proposedSelector);
         }
         
-        AWAssertResponds(self, selector);
+        DKAssertResponds(self, selector);
         
         [center addObserver:self selector:selector name:name object:object];
     }
@@ -164,7 +164,7 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     for (; name != nil; name = va_arg(names, NSString *)) {
-        AWAssertResponds(self, selector);
+        DKAssertResponds(self, selector);
         [center addObserver:self selector:selector name:name object:object];
     }
 }

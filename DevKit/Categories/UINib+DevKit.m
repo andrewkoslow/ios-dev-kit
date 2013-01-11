@@ -7,7 +7,7 @@
 //
 
 #import "UINib+DevKit.h"
-#import "AWAssert.h"
+#import "DKAssert.h"
 #import "NSArray+DevKit.h"
 
 
@@ -16,10 +16,10 @@
 
 - (id)instantiatedWithOwner:(id)owner objectOfClass:(Class)objectClass {
 	NSArray *instantiatedObjects = [self instantiateWithOwner:owner options:nil];
-	AWAssertGreaterThanZero(instantiatedObjects.count);
+	DKAssertGreaterThanZero(instantiatedObjects.count);
 	
 	id instantiatedObject = instantiatedObjects.firstObject;
-	AWAssertClass(instantiatedObject, objectClass);
+	DKAssertClass(instantiatedObject, objectClass);
 	
 	return instantiatedObject;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+DevKit.h"
-#import "AWCommon.h"
+#import "DKCommon.h"
 
 
 @implementation UIViewController (DevKit)
@@ -37,7 +37,7 @@
     className = [className stringByAppendingString:classNameSuffix];
     
     Class class = NSClassFromString(className);
-    AWAssertNotNil(class);
+    DKAssertNotNil(class);
     
     id controller = nil;
     

@@ -1,80 +1,80 @@
 //
-//  AWLog.h
+//  DKLog.h
 //  DevKit
 //
 //  Created by Andrew Koslow on 13.06.12.
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef AWDevKit_AWLog_h
-#define AWDevKit_AWLog_h
+#ifndef DevKit_DKLog_h
+#define DevKit_DKLog_h
 
 
-#ifndef AW_LOG_ENABLE
+#ifndef DK_LOG_ENABLE
 
 #if defined(DEBUG) && DEBUG
-#define AW_LOG_ENABLE DEBUG
+#define DK_LOG_ENABLE DEBUG
 #else
-#define AW_LOG_ENABLE 0
+#define DK_LOG_ENABLE 0
 #endif
 
 #endif
 
 
-#define AWLog(...) AWLogLev(AW_LOG_ENABLE, __VA_ARGS__)
-#define AWLogF() AWLogLevF(AW_LOG_ENABLE)
-#define AWLogM(M) AWLogLevM(AW_LOG_ENABLE, M)
-#define AWLogS() AWLogLevS(AW_LOG_ENABLE)
-#define AWLogV(M, ...) AWLogLevV(AW_LOG_ENABLE, M, __VA_ARGS__)
+#define DKLog(...) DKLogLev(DK_LOG_ENABLE, __VA_ARGS__)
+#define DKLogF() DKLogLevF(DK_LOG_ENABLE)
+#define DKLogM(M) DKLogLevM(DK_LOG_ENABLE, M)
+#define DKLogS() DKLogLevS(DK_LOG_ENABLE)
+#define DKLogV(M, ...) DKLogLevV(DK_LOG_ENABLE, M, __VA_ARGS__)
 
 
-#if AW_LOG_ENABLE
+#if DK_LOG_ENABLE
 
-#define AWLogLev(L, ...) if (L) { AWLogCA(L, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
-#define AWLogLevF(L) if (L) { NSLog(@"%s", __PRETTY_FUNCTION__); }
-#define AWLogLevM(L, M) if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, M); }
-#define AWLogLevS(L) if (L) { NSLog(@"-[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); }
-#define AWLogLevV(L, M, ...) if (L) { AWLogVCA(L, M, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
+#define DKLogLev(L, ...) if (L) { DKLogCA(L, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
+#define DKLogLevF(L) if (L) { NSLog(@"%s", __PRETTY_FUNCTION__); }
+#define DKLogLevM(L, M) if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, M); }
+#define DKLogLevS(L) if (L) { NSLog(@"-[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); }
+#define DKLogLevV(L, M, ...) if (L) { DKLogVCA(L, M, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
 
-#define AWLogCA(L, ARGS_COUNT, ...) AWLogCAVA(L, ARGS_COUNT, __VA_ARGS__)
-#define AWLogCAVA(L, ARGS_COUNT, ...)\
+#define DKLogCA(L, ARGS_COUNT, ...) DKLogCAVA(L, ARGS_COUNT, __VA_ARGS__)
+#define DKLogCAVA(L, ARGS_COUNT, ...)\
 do {\
-    AWLogTmp ## ARGS_COUNT(__VA_ARGS__);\
-    NSString *__argsString = [[NSArray arrayWithObjects:AWLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
+    DKLogTmp ## ARGS_COUNT(__VA_ARGS__);\
+    NSString *__argsString = [[NSArray arrayWithObjects:DKLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
     if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, __argsString); };\
 } while (0);
 
-#define AWLogVCA(L, M, ARGS_COUNT, ...) AWLogVCAVA(L, M, ARGS_COUNT, __VA_ARGS__)
-#define AWLogVCAVA(L, M, ARGS_COUNT, ...)\
+#define DKLogVCA(L, M, ARGS_COUNT, ...) DKLogVCAVA(L, M, ARGS_COUNT, __VA_ARGS__)
+#define DKLogVCAVA(L, M, ARGS_COUNT, ...)\
 do {\
-    AWLogTmp ## ARGS_COUNT(__VA_ARGS__);\
-    NSString *__argsString = [[NSArray arrayWithObjects:AWLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
+    DKLogTmp ## ARGS_COUNT(__VA_ARGS__);\
+    NSString *__argsString = [[NSArray arrayWithObjects:DKLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
     if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:@"%@: %@", M, __argsString]); };\
 } while (0);
 
 #define VA_COUNT(...) VA_COUNT_IMPL(__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1)
 #define VA_COUNT_IMPL(_1,_2,_3,_4,_5,_6,_7,_8,N,...) N
 
-#define AWLogTmp8(v1, v2, v3, v4, v5, v6, v7, v8) AWLogTmp(8, v1) AWLogTmp7(v2, v3, v4, v5, v6, v7, v8)
-#define AWLogTmp7(v1, v2, v3, v4, v5, v6, v7) AWLogTmp(7, v1) AWLogTmp6(v2, v3, v4, v5, v6, v7)
-#define AWLogTmp6(v1, v2, v3, v4, v5, v6) AWLogTmp(6, v1) AWLogTmp5(v2, v3, v4, v5, v6)
-#define AWLogTmp5(v1, v2, v3, v4, v5) AWLogTmp(5, v1) AWLogTmp4(v2, v3, v4, v5)
-#define AWLogTmp4(v1, v2, v3, v4) AWLogTmp(4, v1) AWLogTmp3(v2, v3, v4)
-#define AWLogTmp3(v1, v2, v3) AWLogTmp(3, v1) AWLogTmp2(v2, v3)
-#define AWLogTmp2(v1, v2) AWLogTmp(2, v1) AWLogTmp1(v2)
-#define AWLogTmp1(v1) AWLogTmp(1, v1)
-#define AWLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_ ## n = &__tmp_val_ ## n;
+#define DKLogTmp8(v1, v2, v3, v4, v5, v6, v7, v8) DKLogTmp(8, v1) DKLogTmp7(v2, v3, v4, v5, v6, v7, v8)
+#define DKLogTmp7(v1, v2, v3, v4, v5, v6, v7) DKLogTmp(7, v1) DKLogTmp6(v2, v3, v4, v5, v6, v7)
+#define DKLogTmp6(v1, v2, v3, v4, v5, v6) DKLogTmp(6, v1) DKLogTmp5(v2, v3, v4, v5, v6)
+#define DKLogTmp5(v1, v2, v3, v4, v5) DKLogTmp(5, v1) DKLogTmp4(v2, v3, v4, v5)
+#define DKLogTmp4(v1, v2, v3, v4) DKLogTmp(4, v1) DKLogTmp3(v2, v3, v4)
+#define DKLogTmp3(v1, v2, v3) DKLogTmp(3, v1) DKLogTmp2(v2, v3)
+#define DKLogTmp2(v1, v2) DKLogTmp(2, v1) DKLogTmp1(v2)
+#define DKLogTmp1(v1) DKLogTmp(1, v1)
+#define DKLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_ ## n = &__tmp_val_ ## n;
 
-#define AWLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) AWLogVal(8, v1), AWLogVal7(v2, v3, v4, v5, v6, v7, v8)
-#define AWLogVal7(v1, v2, v3, v4, v5, v6, v7) AWLogVal(7, v1), AWLogVal6(v2, v3, v4, v5, v6, v7)
-#define AWLogVal6(v1, v2, v3, v4, v5, v6) AWLogVal(6, v1), AWLogVal5(v2, v3, v4, v5, v6)
-#define AWLogVal5(v1, v2, v3, v4, v5) AWLogVal(5, v1), AWLogVal4(v2, v3, v4, v5)
-#define AWLogVal4(v1, v2, v3, v4) AWLogVal(4, v1), AWLogVal3(v2, v3, v4)
-#define AWLogVal3(v1, v2, v3) AWLogVal(3, v1), AWLogVal2(v2, v3)
-#define AWLogVal2(v1, v2) AWLogVal(2, v1), AWLogVal1(v2)
-#define AWLogVal1(v1) AWLogVal(1, v1)
+#define DKLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) DKLogVal(8, v1), DKLogVal7(v2, v3, v4, v5, v6, v7, v8)
+#define DKLogVal7(v1, v2, v3, v4, v5, v6, v7) DKLogVal(7, v1), DKLogVal6(v2, v3, v4, v5, v6, v7)
+#define DKLogVal6(v1, v2, v3, v4, v5, v6) DKLogVal(6, v1), DKLogVal5(v2, v3, v4, v5, v6)
+#define DKLogVal5(v1, v2, v3, v4, v5) DKLogVal(5, v1), DKLogVal4(v2, v3, v4, v5)
+#define DKLogVal4(v1, v2, v3, v4) DKLogVal(4, v1), DKLogVal3(v2, v3, v4)
+#define DKLogVal3(v1, v2, v3) DKLogVal(3, v1), DKLogVal2(v2, v3)
+#define DKLogVal2(v1, v2) DKLogVal(2, v1), DKLogVal1(v2)
+#define DKLogVal1(v1) DKLogVal(1, v1)
 
-#define AWLogVal(n, v)\
+#define DKLogVal(n, v)\
 (__builtin_types_compatible_p(__typeof(v), id) ? [NSString stringWithFormat:@"%s %@", #v, *(const id *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), Class) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromClass(*(Class *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), SEL) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromSelector(*(SEL *)__tmp_val_ptr_ ## n)]\
@@ -104,11 +104,11 @@ do {\
 
 #else
 
-#define AWLogLev(L, args...) do {} while (0)
-#define AWLogLevF(L) do {} while (0)
-#define AWLogLevM(L, M) do {} while (0)
-#define AWLogLevS(L) do {} while (0)
-#define AWLogLevV(L, M, ...) do {} while (0)
+#define DKLogLev(L, args...) do {} while (0)
+#define DKLogLevF(L) do {} while (0)
+#define DKLogLevM(L, M) do {} while (0)
+#define DKLogLevS(L) do {} while (0)
+#define DKLogLevV(L, M, ...) do {} while (0)
 
 #endif
 
