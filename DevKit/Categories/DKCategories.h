@@ -13,3 +13,4 @@
 #import "UIViewController+DevKit.h"
 #import "NSString+DevKit.h"
 #import "NSURL+DevKit.h"
+#import "NSFileManager+DevKit.h"
