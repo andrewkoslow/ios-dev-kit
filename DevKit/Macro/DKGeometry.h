@@ -102,4 +102,31 @@ NS_INLINE CGRect CGRectSetSize(CGRect rect, CGSize size) {
 }
 
 
+NS_INLINE CGRect CGRectMakeWithOriginAndSize(CGPoint origin, CGSize size) {
+    CGRect rect;
+    rect.origin = origin;
+    rect.size = size;
+    
+    return rect;
+}
+
+
+NS_INLINE CGRect CGRectMakeWithOrigin(CGPoint origin) {
+    CGRect rect;
+    rect.origin = origin;
+    rect.size = CGSizeZero;
+    
+    return rect;
+}
+
+
+NS_INLINE CGRect CGRectMakeWithSize(CGSize size) {
+    CGRect rect;
+    rect.origin = CGPointZero;
+    rect.size = size;
+    
+    return rect;
+}
+
+
 #endif
