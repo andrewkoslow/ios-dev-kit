@@ -26,6 +26,8 @@
 #define DKAssertResponds(o, s) NSAssert1(o == nil || [o respondsToSelector:s], @""#o" == nil || ["#o" respondsToSelector:(%@)]", NSStringFromSelector(s))
 #define DKAssertConforms(o, p) NSAssert1(o == nil || [o conformsToProtocol:@protocol(p)], @""#o" == nil || ["#o" conformsToProtocol:(%@)]", NSStringFromProtocol(@protocol(p)))
 #define DKAssertClass(o, c) NSAssert(o == nil || [o isKindOfClass:[c class]], @""#o" == nil || ["#o" isKindOfClass:["#c" class]]")
+#define DKAssertThreadMain() NSAssert([NSThread isMainThread] == YES, @"[NSThread isMainThread] == YES")
+#define DKAssertThreadBackground() NSAssert([NSThread isMainThread] == NO, @"[NSThread isMainThread] == NO")
 
 
 #endif
