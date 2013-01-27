@@ -22,6 +22,15 @@
 @implementation NSObject (DevKit)
 
 
++ (id)object {
+#if __has_feature(objc_arc)
+    return [self new];
+#else
+    return [[self new] autorelease];
+#endif
+}
+
+
 #pragma mark - Key Path Observation
 
 - (void)observeKeyPaths:(NSString *)keyPath, ... {
