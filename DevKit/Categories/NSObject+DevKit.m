@@ -153,7 +153,7 @@
     va_list args;
     va_start(args, name);
     
-    [self observeWithSelector:(SEL)selector notificationsForObject:nil name:name namesVA:args];
+    [self observeWithSelector:selector notificationsForObject:nil name:name namesVA:args];
     
     va_end(args);
 }
@@ -163,7 +163,7 @@
     va_list args;
     va_start(args, name);
     
-    [self observeWithSelector:(SEL)selector notificationsForObject:object name:name namesVA:args];
+    [self observeWithSelector:selector notificationsForObject:object name:name namesVA:args];
     
     va_end(args);
 }
