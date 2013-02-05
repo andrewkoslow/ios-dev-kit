@@ -29,7 +29,9 @@
     }
     
     NSString *parameterString = [parameterStringParts componentsJoinedByString:@"&"];
+#if !__has_feature(objc_arc)
     [parameterStringParts release];
+#endif
     
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", self.absoluteString, ((self.query.length > 0) ? @"&" : @"?"), parameterString];
