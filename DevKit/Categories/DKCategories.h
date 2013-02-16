@@ -15,3 +15,4 @@
 #import "NSURL+DevKit.h"
 #import "NSFileManager+DevKit.h"
 #import "UIView+DevKit.h"
+#import "UIDevice+DevKit.h"
