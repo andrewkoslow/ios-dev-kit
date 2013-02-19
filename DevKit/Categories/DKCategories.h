@@ -16,3 +16,4 @@
 #import "NSFileManager+DevKit.h"
 #import "UIView+DevKit.h"
 #import "UIDevice+DevKit.h"
+#import "NSUserDefaults+DevKit.h"
