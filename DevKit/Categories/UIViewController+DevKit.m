@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+DevKit.h"
+#import "DKAssert.h"
 #import "DKCommon.h"
 
 
