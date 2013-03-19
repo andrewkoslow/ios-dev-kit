@@ -18,3 +18,4 @@
 #import "UIDevice+DevKit.h"
 #import "NSUserDefaults+DevKit.h"
 #import "NSSet+DevKit.h"
+#import "NSData+DevKit.h"
