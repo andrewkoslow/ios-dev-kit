@@ -12,5 +12,9 @@
 @interface NSString (DevKit)
 
 - (NSString *)stringByAddingPercentEscapes;
+- (NSString *)stringByReplacingPercentEscapes;
+- (NSString *)shuffle;
+- (NSString *)sha1;
+- (NSString *)sha256;
 
 @end
