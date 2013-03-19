@@ -56,7 +56,7 @@
 
 - (id)dictionaryBySettingObject:(id)object forKey:(id)key {
 	NSMutableDictionary *dictionary = [self mutableCopy];
-    dictionary[key] = object;
+    [dictionary setValue:object forKey:key];
 	return [dictionary copy];
 }
 
@@ -67,7 +67,7 @@
 
 - (id)dictionaryBySettingObject:(id)object forKey:(id)key {
 	NSMutableDictionary *dictionary = [[self mutableCopy] autorelease];
-    dictionary[key] = object;
+    [dictionary setValue:object forKey:key];
 	return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
