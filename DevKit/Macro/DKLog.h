@@ -10,25 +10,19 @@
 #define DevKit_DKLog_h
 
 
-#ifndef DK_LOG_ENABLE
-
-#if defined(DEBUG) && DEBUG
-#define DK_LOG_ENABLE DEBUG
-#else
-#define DK_LOG_ENABLE 0
-#endif
-
+#ifndef DK_ENABLE_MACRO_LOG
+#define DK_ENABLE_MACRO_LOG 0
 #endif
 
 
-#define DKLog(...) DKLogLev(DK_LOG_ENABLE, __VA_ARGS__)
-#define DKLogF() DKLogLevF(DK_LOG_ENABLE)
-#define DKLogM(M) DKLogLevM(DK_LOG_ENABLE, M)
-#define DKLogS() DKLogLevS(DK_LOG_ENABLE)
-#define DKLogV(M, ...) DKLogLevV(DK_LOG_ENABLE, M, __VA_ARGS__)
+#define DKLog(...) DKLogLev(DK_ENABLE_MACRO_LOG, __VA_ARGS__)
+#define DKLogF() DKLogLevF(DK_ENABLE_MACRO_LOG)
+#define DKLogM(M) DKLogLevM(DK_ENABLE_MACRO_LOG, M)
+#define DKLogS() DKLogLevS(DK_ENABLE_MACRO_LOG)
+#define DKLogV(M, ...) DKLogLevV(DK_ENABLE_MACRO_LOG, M, __VA_ARGS__)
 
 
-#if DK_LOG_ENABLE
+#if DK_ENABLE_MACRO_LOG
 
 #define DKLogLev(L, ...) if (L) { DKLogCA(L, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
 #define DKLogLevF(L) if (L) { NSLog(@"%s", __PRETTY_FUNCTION__); }

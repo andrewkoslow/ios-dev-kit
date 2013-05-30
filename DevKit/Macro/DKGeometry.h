@@ -10,6 +10,13 @@
 #define DevKit_DKGeometry_h
 
 
+#ifndef DK_ENABLE_MACRO_GEOMETRY
+#define DK_ENABLE_MACRO_GEOMETRY 0
+#endif
+
+
+#if DK_ENABLE_MACRO_GEOMETRY
+
 NS_INLINE CGRect CGRectSetMinX(CGRect rect, CGFloat minX) {
     CGFloat delta = minX - CGRectGetMinX(rect);
     rect.origin.x += delta;
@@ -127,6 +134,8 @@ NS_INLINE CGRect CGRectMakeWithSize(CGSize size) {
     
     return rect;
 }
+
+#endif
 
 
 #endif
