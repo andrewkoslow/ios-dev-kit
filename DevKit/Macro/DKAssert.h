@@ -10,12 +10,12 @@
 #define DevKit_DKAssert_h
 
 
-#ifndef DK_ENABLE_MACRO_ASSERT
-#define DK_ENABLE_MACRO_ASSERT 0
+#ifndef DK_MACRO_ASSERT_ENABLE
+#define DK_MACRO_ASSERT_ENABLE 0
 #endif
 
 
-#if DK_ENABLE_MACRO_ASSERT
+#if DK_MACRO_ASSERT_ENABLE
 
 #define DKAssert(e) NSAssert(e, @#e)
 #define DKAssertNil(e) NSAssert(e == nil, @#e" == nil")

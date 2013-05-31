@@ -10,12 +10,12 @@
 #define DevKit_DKCommon_h
 
 
-#ifndef DK_ENABLE_MACRO_COMMON
-#define DK_ENABLE_MACRO_COMMON 0
+#ifndef DK_MACRO_COMMON_ENABLE
+#define DK_MACRO_COMMON_ENABLE 0
 #endif
 
 
-#if DK_ENABLE_MACRO_COMMON
+#if DK_MACRO_COMMON_ENABLE
 
 #define UIUserInterfaceIdiomIsPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define UIUserInterfaceIdiomIsPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)

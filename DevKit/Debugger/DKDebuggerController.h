@@ -7,7 +7,7 @@
 //
 
 
-#if defined(DK_ENABLE_DEBUGGER) && DK_ENABLE_DEBUGGER
+#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
 
 
 #import <UIKit/UIKit.h>

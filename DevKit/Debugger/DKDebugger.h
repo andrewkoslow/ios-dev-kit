@@ -7,8 +7,8 @@
 //
 
 
-#ifndef DK_ENABLE_DEBUGGER
-#define DK_ENABLE_DEBUGGER 0
+#ifndef DK_DEBUGGER_ENABLE
+#define DK_DEBUGGER_ENABLE 0
 #endif
 
 

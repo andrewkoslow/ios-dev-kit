@@ -10,65 +10,106 @@
 #define DevKit_DKLog_h
 
 
-#ifndef DK_ENABLE_MACRO_LOG
-#define DK_ENABLE_MACRO_LOG 0
+#ifndef DK_MACRO_LOG_ENABLE
+#define DK_MACRO_LOG_ENABLE 0
+#endif
+
+#ifndef DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE
+#define DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE 0
 #endif
 
 
-#define DKLog(...) DKLogLev(DK_ENABLE_MACRO_LOG, __VA_ARGS__)
-#define DKLogF() DKLogLevF(DK_ENABLE_MACRO_LOG)
-#define DKLogM(M) DKLogLevM(DK_ENABLE_MACRO_LOG, M)
-#define DKLogS() DKLogLevS(DK_ENABLE_MACRO_LOG)
-#define DKLogV(M, ...) DKLogLevV(DK_ENABLE_MACRO_LOG, M, __VA_ARGS__)
+#ifndef DKLogConsoleLog
+#if DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE
+#define DKLogConsoleLog(format...) DKConsoleLog(format)
+#else
+#define DKLogConsoleLog(...) do {} while (0)
+#endif
+#endif
 
 
-#if DK_ENABLE_MACRO_LOG
+#define DKLogM(message) DKLogSevMes(DK_MACRO_LOG_ENABLE, message)
+#define DKLogV(variables...) DKLogSevVars(DK_MACRO_LOG_ENABLE, variables)
+#define DKLogF() DKLogSevFunc(DK_MACRO_LOG_ENABLE)
+#define DKLogS() DKLogSevSel(DK_MACRO_LOG_ENABLE)
+#define DKLogSM(message) DKLogSevSelMes(DK_MACRO_LOG_ENABLE, message)
+#define DKLogSV(variables...) DKLogSevSelVars(DK_MACRO_LOG_ENABLE, variables)
 
-#define DKLogLev(L, ...) if (L) { DKLogCA(L, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
-#define DKLogLevF(L) if (L) { NSLog(@"%s", __PRETTY_FUNCTION__); }
-#define DKLogLevM(L, M) if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, M); }
-#define DKLogLevS(L) if (L) { NSLog(@"-[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); }
-#define DKLogLevV(L, M, ...) if (L) { DKLogVCA(L, M, VA_COUNT(__VA_ARGS__), __VA_ARGS__); }
 
-#define DKLogCA(L, ARGS_COUNT, ...) DKLogCAVA(L, ARGS_COUNT, __VA_ARGS__)
-#define DKLogCAVA(L, ARGS_COUNT, ...)\
+#if DK_MACRO_LOG_ENABLE
+
+#define DKLogSevMes(severity, message) if (severity) {\
+    NSLog(@"%@", message);\
+    DKLogConsoleLog(message);\
+}
+
+#define DKLogSevVars(severity, variables...) if (severity) { ____DKLogSevVarsArgs(severity, ____DKLogArgCount(variables), variables); }
+
+#define DKLogSevFunc(severity) if (severity) {\
+    NSLog(@"%s", __PRETTY_FUNCTION__);\
+    DKLogConsoleLog(@"%s", __PRETTY_FUNCTION__);\
+}
+
+#define DKLogSevSel(severity) if (severity) {\
+    NSLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
+    DKLogConsoleLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
+}
+
+#define DKLogSevSelMes(severity, message) if (severity) {\
+    NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
+    DKLogConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
+}
+
+#define DKLogSevSelVars(severity, variables...) if (severity) { ____DKLogSevSelVarsArgs(severity, ____DKLogArgCount(variables), variables); }
+
+
+#define ____DKLogSevVarsArgs(S, ARG_COUNT, ...) ____DKLogSevVarsImpl(S, ARG_COUNT, __VA_ARGS__)
+#define ____DKLogSevVarsImpl(S, ARG_COUNT, ...)\
 do {\
-    DKLogTmp ## ARGS_COUNT(__VA_ARGS__);\
-    NSString *__argsString = [[NSArray arrayWithObjects:DKLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
-    if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, __argsString); };\
+    ____DKLogTmp ## ARG_COUNT(__VA_ARGS__);\
+    NSString *__argsString = [[NSArray arrayWithObjects:____DKLogVal ## ARG_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
+    if (S) {\
+        NSLog(@"%@", __argsString);\
+        DKLogConsoleLog(@"%@", __argsString);\
+    };\
 } while (0);
 
-#define DKLogVCA(L, M, ARGS_COUNT, ...) DKLogVCAVA(L, M, ARGS_COUNT, __VA_ARGS__)
-#define DKLogVCAVA(L, M, ARGS_COUNT, ...)\
+
+#define ____DKLogSevSelVarsArgs(S, ARG_COUNT, ...) ____DKLogSevSelVarsImpl(S, ARG_COUNT, __VA_ARGS__)
+#define ____DKLogSevSelVarsImpl(S, ARG_COUNT, ...)\
 do {\
-    DKLogTmp ## ARGS_COUNT(__VA_ARGS__);\
-    NSString *__argsString = [[NSArray arrayWithObjects:DKLogVal ## ARGS_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
-    if (L) { NSLog(@"%s --- %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:@"%@: %@", M, __argsString]); };\
+    ____DKLogTmp ## ARG_COUNT(__VA_ARGS__);\
+    NSString *__argsString = [[NSArray arrayWithObjects:____DKLogVal ## ARG_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
+    if (S) {\
+        NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
+        DKLogConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
+    };\
 } while (0);
 
-#define VA_COUNT(...) VA_COUNT_IMPL(__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1)
-#define VA_COUNT_IMPL(_1,_2,_3,_4,_5,_6,_7,_8,N,...) N
 
-#define DKLogTmp8(v1, v2, v3, v4, v5, v6, v7, v8) DKLogTmp(8, v1) DKLogTmp7(v2, v3, v4, v5, v6, v7, v8)
-#define DKLogTmp7(v1, v2, v3, v4, v5, v6, v7) DKLogTmp(7, v1) DKLogTmp6(v2, v3, v4, v5, v6, v7)
-#define DKLogTmp6(v1, v2, v3, v4, v5, v6) DKLogTmp(6, v1) DKLogTmp5(v2, v3, v4, v5, v6)
-#define DKLogTmp5(v1, v2, v3, v4, v5) DKLogTmp(5, v1) DKLogTmp4(v2, v3, v4, v5)
-#define DKLogTmp4(v1, v2, v3, v4) DKLogTmp(4, v1) DKLogTmp3(v2, v3, v4)
-#define DKLogTmp3(v1, v2, v3) DKLogTmp(3, v1) DKLogTmp2(v2, v3)
-#define DKLogTmp2(v1, v2) DKLogTmp(2, v1) DKLogTmp1(v2)
-#define DKLogTmp1(v1) DKLogTmp(1, v1)
-#define DKLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_ ## n = &__tmp_val_ ## n;
+#define ____DKLogArgCount(...) ____DKLogArgCountImpl(__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1)
+#define ____DKLogArgCountImpl(_1,_2,_3,_4,_5,_6,_7,_8,N,...) N
 
-#define DKLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) DKLogVal(8, v1), DKLogVal7(v2, v3, v4, v5, v6, v7, v8)
-#define DKLogVal7(v1, v2, v3, v4, v5, v6, v7) DKLogVal(7, v1), DKLogVal6(v2, v3, v4, v5, v6, v7)
-#define DKLogVal6(v1, v2, v3, v4, v5, v6) DKLogVal(6, v1), DKLogVal5(v2, v3, v4, v5, v6)
-#define DKLogVal5(v1, v2, v3, v4, v5) DKLogVal(5, v1), DKLogVal4(v2, v3, v4, v5)
-#define DKLogVal4(v1, v2, v3, v4) DKLogVal(4, v1), DKLogVal3(v2, v3, v4)
-#define DKLogVal3(v1, v2, v3) DKLogVal(3, v1), DKLogVal2(v2, v3)
-#define DKLogVal2(v1, v2) DKLogVal(2, v1), DKLogVal1(v2)
-#define DKLogVal1(v1) DKLogVal(1, v1)
+#define ____DKLogTmp8(v1, v2, v3, v4, v5, v6, v7, v8) ____DKLogTmp(8, v1) ____DKLogTmp7(v2, v3, v4, v5, v6, v7, v8)
+#define ____DKLogTmp7(v1, v2, v3, v4, v5, v6, v7) ____DKLogTmp(7, v1) ____DKLogTmp6(v2, v3, v4, v5, v6, v7)
+#define ____DKLogTmp6(v1, v2, v3, v4, v5, v6) ____DKLogTmp(6, v1) ____DKLogTmp5(v2, v3, v4, v5, v6)
+#define ____DKLogTmp5(v1, v2, v3, v4, v5) ____DKLogTmp(5, v1) ____DKLogTmp4(v2, v3, v4, v5)
+#define ____DKLogTmp4(v1, v2, v3, v4) ____DKLogTmp(4, v1) ____DKLogTmp3(v2, v3, v4)
+#define ____DKLogTmp3(v1, v2, v3) ____DKLogTmp(3, v1) ____DKLogTmp2(v2, v3)
+#define ____DKLogTmp2(v1, v2) ____DKLogTmp(2, v1) ____DKLogTmp1(v2)
+#define ____DKLogTmp1(v1) ____DKLogTmp(1, v1)
+#define ____DKLogTmp(n, v) const __typeof(v) __attribute__((unused)) __tmp_val_ ## n = v; void const *__tmp_val_ptr_ ## n = &__tmp_val_ ## n;
 
-#define DKLogVal(n, v)\
+#define ____DKLogVal8(v1, v2, v3, v4, v5, v6, v7, v8) ____DKLogVal(8, v1), ____DKLogVal7(v2, v3, v4, v5, v6, v7, v8)
+#define ____DKLogVal7(v1, v2, v3, v4, v5, v6, v7) ____DKLogVal(7, v1), ____DKLogVal6(v2, v3, v4, v5, v6, v7)
+#define ____DKLogVal6(v1, v2, v3, v4, v5, v6) ____DKLogVal(6, v1), ____DKLogVal5(v2, v3, v4, v5, v6)
+#define ____DKLogVal5(v1, v2, v3, v4, v5) ____DKLogVal(5, v1), ____DKLogVal4(v2, v3, v4, v5)
+#define ____DKLogVal4(v1, v2, v3, v4) ____DKLogVal(4, v1), ____DKLogVal3(v2, v3, v4)
+#define ____DKLogVal3(v1, v2, v3) ____DKLogVal(3, v1), ____DKLogVal2(v2, v3)
+#define ____DKLogVal2(v1, v2) ____DKLogVal(2, v1), ____DKLogVal1(v2)
+#define ____DKLogVal1(v1) ____DKLogVal(1, v1)
+
+#define ____DKLogVal(n, v)\
 (__builtin_types_compatible_p(__typeof(v), id) ? [NSString stringWithFormat:@"%s %@", #v, *(const id *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), Class) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromClass(*(Class *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), SEL) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromSelector(*(SEL *)__tmp_val_ptr_ ## n)]\
@@ -93,16 +134,17 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), long double) ? [NSString stringWithFormat:@"%s %Lf", #v, *(long double *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), void *) ? [NSString stringWithFormat:@"%s %p", #v, *(void **)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)__tmp_val_ptr_ ## n) ? @"YES" : @"NO")]\
-: @"__UNKNOWN__TYPE__"\
+: @"<Unknown Type>"\
 ))))))))))))))))))))))))
 
 #else
 
-#define DKLogLev(L, args...) do {} while (0)
-#define DKLogLevF(L) do {} while (0)
-#define DKLogLevM(L, M) do {} while (0)
-#define DKLogLevS(L) do {} while (0)
-#define DKLogLevV(L, M, ...) do {} while (0)
+#define DKLogM(message) do {} while (0)
+#define DKLogV(variables...) do {} while (0)
+#define DKLogF() do {} while (0)
+#define DKLogS() do {} while (0)
+#define DKLogSM(message) do {} while (0)
+#define DKLogSV(variables...) do {} while (0)
 
 #endif
 

@@ -7,28 +7,29 @@
 //
 
 
-#ifndef DK_ENABLE_ALL
+#ifndef DK_ENABLE
 
 #ifdef DEBUG
-#define DK_ENABLE_ALL DEBUG
+#define DK_ENABLE DEBUG
 #else
-#define DK_ENABLE_ALL 0
+#define DK_ENABLE 0
 #endif
 
 #endif
 
 
-#ifndef DK_ENABLE_MACRO
-#define DK_ENABLE_MACRO DK_ENABLE_ALL
+#ifndef DK_MACRO_ENABLE
+#define DK_MACRO_ENABLE DK_ENABLE
 #endif
 
-#ifndef DK_ENABLE_CATEGORIES
-#define DK_ENABLE_CATEGORIES DK_ENABLE_ALL
+#ifndef DK_CATEGORIES_ENABLE
+#define DK_CATEGORIES_ENABLE DK_ENABLE
 #endif
 
-#ifndef DK_ENABLE_DEBUGGER
-#define DK_ENABLE_DEBUGGER DK_ENABLE_ALL
+#ifndef DK_DEBUGGER_ENABLE
+#define DK_DEBUGGER_ENABLE DK_ENABLE
 #endif
+
 
 #import "Macro/DKMacro.h"
 #import "Categories/DKCategories.h"

@@ -7,7 +7,18 @@
 //
 
 
-#if defined(DK_ENABLE_DEBUGGER) && DK_ENABLE_DEBUGGER
+#ifndef DKConsoleLog
+
+#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
+#define DKConsoleLog(format...) [[DKDebuggerConsole sharedConsole] logMessage:[NSString stringWithFormat:format]]
+#else
+#define DKConsoleLog(format...) do {} while (0)
+#endif
+
+#endif
+
+
+#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
 
 
 #import <Foundation/Foundation.h>

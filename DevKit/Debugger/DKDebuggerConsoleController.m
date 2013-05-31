@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Andrew Koslow. All rights reserved.
 //
 
-#if defined(DK_ENABLE_DEBUGGER) && DK_ENABLE_DEBUGGER
+#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
 
 
 #import "DKDebuggerConsoleController.h"
