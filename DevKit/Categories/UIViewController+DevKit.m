@@ -15,11 +15,7 @@
 
 
 + (id)viewController {
-#if __has_feature(objc_arc)
     return [[self alloc] initWithNibName:nil bundle:nil];
-#else
-    return [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
-#endif
 }
 
 
@@ -40,15 +36,7 @@
     Class class = NSClassFromString(className);
     DKAssertNotNil(class);
     
-    id controller = nil;
-    
-#if __has_feature(objc_arc)
-    controller = [[class alloc] initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-#else
-    controller = [[[class alloc] initWithNibName:nibNameOrNil bundle:nibBundleOrNil] autorelease];
-#endif
-    
-    return controller;
+    return [[class alloc] initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 }
 
 

@@ -23,11 +23,7 @@
 
 
 + (id)object {
-#if __has_feature(objc_arc)
     return [self new];
-#else
-    return [[self new] autorelease];
-#endif
 }
 
 

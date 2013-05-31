@@ -16,7 +16,6 @@
 - (NSURL *)URLByAppendingQueryParameters:(NSDictionary *)parameters {
     if (parameters.count == 0) return self;
     
-    
     NSMutableArray *parameterStringParts = [NSMutableArray new];
     
     for (NSString *key in parameters) {
@@ -29,11 +28,6 @@
     }
     
     NSString *parameterString = [parameterStringParts componentsJoinedByString:@"&"];
-#if !__has_feature(objc_arc)
-    [parameterStringParts release];
-#endif
-    
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", self.absoluteString, ((self.query.length > 0) ? @"&" : @"?"), parameterString];
     
     return [NSURL URLWithString:URLString];

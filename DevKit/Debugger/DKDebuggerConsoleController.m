@@ -24,24 +24,17 @@
 @implementation DKDebuggerConsoleController
 
 
-- (void)dealloc {
-    [_textView release];
-    
-    [super dealloc];
-}
-
-
 - (void)loadView {
     self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    self.textView = [[[UITextView alloc] initWithFrame:self.view.bounds] autorelease];
+    self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.textView.editable = NO;
     self.textView.font = [UIFont fontWithName:@"Courier New" size:13.0];
     
     [self.view addSubview:self.textView];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)];
 }
 
 
@@ -103,8 +96,6 @@
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
     
     NSString *date = [dateFormatter stringFromDate:[NSDate date]];
-    [dateFormatter release];
-    
     NSString *subject = [NSString stringWithFormat:@"%@ %@ (%@) %@", bundleName, bundleVersion, bundleBuild, date];
     
     MFMailComposeViewController *mailComposeViewController = [MFMailComposeViewController new];
@@ -113,8 +104,6 @@
     [mailComposeViewController setMessageBody:self.logTextToPerformAction isHTML:NO];
     
     [self presentViewController:mailComposeViewController animated:YES completion:nil];
-    
-    [mailComposeViewController release];
 }
 
 
@@ -127,7 +116,6 @@
 - (void)showActionSheet {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Copy", @"Mail…", @"Clear", nil];
     [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
-    [actionSheet release];
 }
 
 

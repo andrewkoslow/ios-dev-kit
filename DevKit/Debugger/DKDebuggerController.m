@@ -16,7 +16,7 @@
 @implementation DKDebuggerController
 
 
-static UIWindow *debuggerWindow = nil;
+static UIWindow __strong *debuggerWindow = nil;
 
 
 + (void)present {
@@ -28,10 +28,10 @@ static UIWindow *debuggerWindow = nil;
     debuggerWindow.autoresizesSubviews = YES;
     debuggerWindow.backgroundColor = [UIColor clearColor];
     
-    DKDebuggerController *debuggerController = [[[[self class] alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
-    debuggerController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:[self class] action:@selector(dismiss)] autorelease];
+    DKDebuggerController *debuggerController = [[[self class] alloc] initWithStyle:UITableViewStyleGrouped];
+    debuggerController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:[self class] action:@selector(dismiss)];
     
-    debuggerWindow.rootViewController = [[[UINavigationController alloc] initWithRootViewController:debuggerController] autorelease];
+    debuggerWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:debuggerController];
     
     [debuggerWindow makeKeyAndVisible];
 }
@@ -39,7 +39,6 @@ static UIWindow *debuggerWindow = nil;
 
 + (void)dismiss {
     [debuggerWindow resignKeyWindow];
-    [debuggerWindow release];
     debuggerWindow = nil;
 }
 
@@ -67,7 +66,7 @@ static UIWindow *debuggerWindow = nil;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
     if (indexPath.row == 0) {
         cell.textLabel.text = @"Console";
@@ -84,7 +83,7 @@ static UIWindow *debuggerWindow = nil;
     UIViewController *controller = nil;
     
     if (indexPath.row == 0) {
-        controller = [[DKDebuggerConsoleController new] autorelease];
+        controller = [DKDebuggerConsoleController new];
     }
     
     controller.title = cell.textLabel.text;

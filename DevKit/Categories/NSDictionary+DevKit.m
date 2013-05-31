@@ -50,28 +50,11 @@
 }
 
 
-#pragma mark - ARC variant
-
-#if __has_feature(objc_arc)
-
 - (id)dictionaryBySettingObject:(id)object forKey:(id)key {
 	NSMutableDictionary *dictionary = [self mutableCopy];
     [dictionary setValue:object forKey:key];
 	return [dictionary copy];
 }
-
-
-#pragma mark - Non-ARC variant
-
-#else
-
-- (id)dictionaryBySettingObject:(id)object forKey:(id)key {
-	NSMutableDictionary *dictionary = [[self mutableCopy] autorelease];
-    [dictionary setValue:object forKey:key];
-	return [NSDictionary dictionaryWithDictionary:dictionary];
-}
-
-#endif
 
 
 @end
