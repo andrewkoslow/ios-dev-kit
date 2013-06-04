@@ -9,6 +9,8 @@
 #if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
 
 
+#include <mach/mach.h>
+#include <pthread.h>
 #import "DKDebuggerConsole.h"
 
 
@@ -53,11 +55,21 @@ NSString *const DKDebuggerConsoleDidUpdateLogNotification = @"DKDebuggerConsoleD
 
 - (void)logMessage:(NSString *)message {
     @autoreleasepool {
+        NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+        thread_act_t machThreadID = mach_thread_self();
+        
         NSString *log = self.log;
         if (log == nil) log = @"";
         if (log.length) log = [log stringByAppendingString:@"\n"];
         
-        self.log = [log stringByAppendingString:message];
+        static NSDateFormatter *dateFormatter = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            dateFormatter = [NSDateFormatter new];
+            dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
+        });
+        
+        self.log = [log stringByAppendingFormat:@"%@ %@[%d:%x] %@", [dateFormatter stringFromDate:[NSDate date]], processInfo.processName, processInfo.processIdentifier, machThreadID, message];
     }
     
     [self notifyDidUpdateLog];
