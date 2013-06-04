@@ -31,6 +31,9 @@
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.textView.editable = NO;
     self.textView.font = [UIFont fontWithName:@"Courier New" size:13.0];
+    self.textView.bounces = YES;
+    self.textView.alwaysBounceVertical = YES;
+    self.textView.showsVerticalScrollIndicator = YES;
     
     [self.view addSubview:self.textView];
     
@@ -66,7 +69,8 @@
         if (scroll) {
             CGPoint contentOffset = self.textView.contentOffset;
             contentOffset.y = (self.textView.contentSize.height + self.textView.contentInset.bottom - self.textView.bounds.size.height);
-            self.textView.contentOffset = contentOffset;
+            
+            if (contentOffset.y > 0) self.textView.contentOffset = contentOffset;
         }
     }
 }

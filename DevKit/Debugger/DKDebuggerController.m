@@ -23,7 +23,6 @@ static UIWindow __strong *debuggerWindow = nil;
     if (debuggerWindow) return;
     
     debuggerWindow = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    debuggerWindow.windowLevel = UIWindowLevelAlert;
     debuggerWindow.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     debuggerWindow.autoresizesSubviews = YES;
     debuggerWindow.backgroundColor = [UIColor clearColor];
