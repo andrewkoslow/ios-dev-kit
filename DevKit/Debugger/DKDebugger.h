@@ -12,6 +12,17 @@
 #endif
 
 
+#if DK_DEBUGGER_ENABLE
+
+#ifndef DKConsoleLog
+#define DKConsoleLog(format...) [[DKDebuggerConsole sharedConsole] logMessage:[NSString stringWithFormat:format]]
+#else
+#define DKConsoleLog(format...) do {} while (0)
+#endif
+
+#endif
+
+
 #import "DKDebuggerController.h"
 #import "DKDebuggerConsole.h"
 
