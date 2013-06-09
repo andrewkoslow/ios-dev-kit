@@ -17,9 +17,20 @@
 NSString *const DKDebuggerConsoleDidUpdateLogNotification = @"DKDebuggerConsoleDidUpdateLogNotification";
 
 
+void DKDebuggerConsoleUncaughtExceptionHandler(NSException *exception) {
+    NSString *callStackReturnAddressesMessage = [NSString stringWithFormat:@"*** Terminating app due to uncaught exception '%@', reason: '%@'\n*** Call stack symbols:\n%@",
+                                                 NSStringFromClass(exception.class),
+                                                 exception.reason,
+                                                 exception.callStackSymbols];
+    
+    [[DKDebuggerConsole sharedConsole] logMessage:callStackReturnAddressesMessage];
+}
+
+
 @interface DKDebuggerConsole ()
 
 @property (readwrite, retain) NSString *log;
+@property (retain) NSFileHandle *logFileHandle;
 
 @end
 
@@ -27,15 +38,65 @@ NSString *const DKDebuggerConsoleDidUpdateLogNotification = @"DKDebuggerConsoleD
 @implementation DKDebuggerConsole
 
 
+static __strong DKDebuggerConsole *sharedConsole = nil;
+
+
++ (void)initialize {
+#if DK_DEBUGGER_CONSOLE_AUTO_CREATE_SHARED
+    
+    sharedConsole = [self new];
+    
+#endif
+}
+
+
 + (DKDebuggerConsole *)sharedConsole {
-    static DKDebuggerConsole *sharedConsole = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedConsole = [[self class] new];
-    });
-    
     return sharedConsole;
+}
+
+
++ (void)setSharedConsole:(DKDebuggerConsole *)console {
+    sharedConsole = console;
+}
+
+
+- (id)init {
+    if ((self = [super init])) {
+        
+#if DK_DEBUGGER_CONSOLE_LOG_TO_FILE
+        _logToFile = YES;
+#endif
+        _logFilePathGenerationBlock = ^(NSString *baseDirectoryPath) {
+            static NSDateFormatter *dateFormatter = nil;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                dateFormatter = [NSDateFormatter new];
+                dateFormatter.dateFormat = @"yyyy-MM-dd-HHmmss";
+            });
+            
+            NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+            NSString *fileName = [NSString stringWithFormat:@"%@_%@_%@.log", processInfo.processName, [dateFormatter stringFromDate:[NSDate date]], processInfo.hostName];
+            
+            return [baseDirectoryPath stringByAppendingPathComponent:fileName];
+        };
+        
+        _logFileHandleCreationBlock = ^(NSString *logFilePath) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:[logFilePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
+            
+            BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:logFilePath];
+            if (exists == NO) {
+                [[NSFileManager defaultManager] createFileAtPath:logFilePath contents:nil attributes:nil];
+            }
+            
+            NSFileHandle *logFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
+            [logFileHandle seekToEndOfFile];
+            
+            return logFileHandle;
+        };
+        
+        _log = @"";
+    }
+    return self;
 }
 
 
@@ -54,25 +115,66 @@ NSString *const DKDebuggerConsoleDidUpdateLogNotification = @"DKDebuggerConsoleD
 
 
 - (void)logMessage:(NSString *)message {
-    @autoreleasepool {
-        NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-        thread_act_t machThreadID = mach_thread_self();
+    @synchronized(self) {
+        static __strong NSDateFormatter *dateFormatter = nil;
+        static __strong NSProcessInfo *processInfo = nil;
         
-        NSString *log = self.log;
-        if (log == nil) log = @"";
-        if (log.length) log = [log stringByAppendingString:@"\n"];
-        
-        static NSDateFormatter *dateFormatter = nil;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             dateFormatter = [NSDateFormatter new];
             dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
+            
+            processInfo = [NSProcessInfo processInfo];
         });
         
-        self.log = [log stringByAppendingFormat:@"%@ %@[%d:%x] %@", [dateFormatter stringFromDate:[NSDate date]], processInfo.processName, processInfo.processIdentifier, machThreadID, message];
+        thread_act_t machThreadID = mach_thread_self();
+        NSString *prefix = [NSString stringWithFormat:@"%@ %@[%d:%x] ", [dateFormatter stringFromDate:[NSDate date]], processInfo.processName, processInfo.processIdentifier, machThreadID];
+        
+        message = [prefix stringByAppendingString:message];
+        message = [message stringByAppendingString:@"\n"];
+        
+        if (self.logToFile) {
+            if (self.logFileHandle == nil) {
+                [self openLogFile];
+                
+                NSString *sessionMessage = [@"" stringByPaddingToLength:80 withString:@"-" startingAtIndex:0];
+                sessionMessage = [sessionMessage stringByAppendingString:@"\n"];
+                sessionMessage = [sessionMessage stringByAppendingString:prefix];
+                sessionMessage = [sessionMessage stringByAppendingString:@"New Log Started\n\n"];
+                
+                [self logMessageToLogFile:sessionMessage];
+            }
+        }
+        
+        if (self.logToFile) {
+            [self logMessageToLogFile:message];
+        }
+        
+        self.log = [self.log stringByAppendingString:message];
+        [self notifyDidUpdateLog];
+    }
+}
+
+
+- (void)openLogFile {
+    NSString *logFilePath = self.logFilePathGenerationBlock(NSTemporaryDirectory());
+    
+    self.logFileHandle = self.logFileHandleCreationBlock(logFilePath);
+}
+
+
+- (void)logMessageToLogFile:(NSString *)message {
+    if (self.logFileHandle) {
+        @try {
+            [self.logFileHandle writeData:[message dataUsingEncoding:NSUTF8StringEncoding]];
+            [self.logFileHandle synchronizeFile];
+            
+        } @catch (NSException *exception) {
+            self.logFileHandle = nil;
+        }
     }
     
-    [self notifyDidUpdateLog];
+    self.logToFile = (self.logFileHandle != nil);
 }
 
 
