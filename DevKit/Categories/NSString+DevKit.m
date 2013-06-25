@@ -40,8 +40,8 @@
 - (NSString *)shuffle {
     NSMutableString *tempString = [self mutableCopy];
     
-    for (NSInteger i = tempString.length - 1; i >= 0; i--) {
-        NSInteger j = arc4random() % (i + 1);
+    for (NSUInteger i = tempString.length - 1; i != 0; i--) {
+        NSUInteger j = arc4random() % (i + 1);
         
         NSString *buffer = [tempString substringWithRange:NSMakeRange(i, 1)];
         [tempString replaceCharactersInRange:NSMakeRange(i, 1) withString:[tempString substringWithRange:NSMakeRange(j, 1)]];
