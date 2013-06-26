@@ -76,15 +76,31 @@ NS_INLINE CGRect CGRectSetHeight(CGRect rect, CGFloat height) {
 }
 
 
-NS_INLINE CGRect CGRectSetX(CGRect rect, CGFloat x) {
-    rect.origin.x = x;
+NS_INLINE CGRect CGRectSetLeft(CGRect rect, CGFloat left) {
+    rect.origin.x = left;
     
     return rect;
 }
 
 
-NS_INLINE CGRect CGRectSetY(CGRect rect, CGFloat y) {
-    rect.origin.y = y;
+NS_INLINE CGRect CGRectSetTop(CGRect rect, CGFloat top) {
+    rect.origin.y = top;
+    
+    return rect;
+}
+
+
+NS_INLINE CGRect CGRectSetRight(CGRect rect, CGFloat right) {
+    CGFloat delta = right - CGRectGetMaxX(rect);
+    rect.origin.x += delta;
+    
+    return rect;
+}
+
+
+NS_INLINE CGRect CGRectSetBottom(CGRect rect, CGFloat bottom) {
+    CGFloat delta = bottom - CGRectGetMaxX(rect);
+    rect.origin.y += delta;
     
     return rect;
 }

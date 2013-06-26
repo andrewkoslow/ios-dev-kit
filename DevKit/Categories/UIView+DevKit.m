@@ -46,23 +46,43 @@
 }
 
 
-- (CGFloat)x {
-    return self.frame.origin.x;
+- (CGFloat)left {
+    return CGRectGetMinX(self.frame);
 }
 
 
-- (void)setX:(CGFloat)x {
-    self.frame = CGRectSetX(self.frame, x);
+- (void)setLeft:(CGFloat)left {
+    self.frame = CGRectSetLeft(self.frame, left);
 }
 
 
-- (CGFloat)y {
-    return self.frame.origin.y;
+- (CGFloat)top {
+    return CGRectGetMinY(self.frame);
 }
 
 
-- (void)setY:(CGFloat)y {
-    self.frame = CGRectSetY(self.frame, y);
+- (void)setTop:(CGFloat)top {
+    self.frame = CGRectSetTop(self.frame, top);
+}
+
+
+- (CGFloat)right {
+    return CGRectGetMaxX(self.frame);
+}
+
+
+- (void)setRight:(CGFloat)right {
+    self.frame = CGRectSetRight(self.frame, right);
+}
+
+
+- (CGFloat)bottom {
+    return CGRectGetMaxY(self.frame);
+}
+
+
+- (void)setBottom:(CGFloat)bottom {
+    self.frame = CGRectSetBottom(self.frame, bottom);
 }
 
 
@@ -168,23 +188,43 @@
 }
 
 
-- (CGFloat)boundX {
-    return self.bounds.origin.x;
+- (CGFloat)boundLeft {
+    return CGRectGetMinX(self.bounds);
 }
 
 
-- (void)setBoundX:(CGFloat)x {
-    self.bounds = CGRectSetX(self.bounds, x);
+- (void)setBoundLeft:(CGFloat)boundLeft {
+    self.bounds = CGRectSetLeft(self.bounds, boundLeft);
 }
 
 
-- (CGFloat)boundY {
-    return self.bounds.origin.y;
+- (CGFloat)boundTop {
+    return CGRectGetMinY(self.bounds);
 }
 
 
-- (void)setBoundY:(CGFloat)y {
-    self.bounds = CGRectSetY(self.bounds, y);
+- (void)setBoundTop:(CGFloat)boundTop {
+    self.bounds = CGRectSetTop(self.bounds, boundTop);
+}
+
+
+- (CGFloat)boundRight {
+    return CGRectGetMaxX(self.bounds);
+}
+
+
+- (void)setBoundRight:(CGFloat)boundRight {
+    self.bounds = CGRectSetRight(self.bounds, boundRight);
+}
+
+
+- (CGFloat)boundBottom {
+    return CGRectGetMaxY(self.bounds);
+}
+
+
+- (void)setBoundBottom:(CGFloat)boundBottom {
+    self.bounds = CGRectSetBottom(self.bounds, boundBottom);
 }
 
 
