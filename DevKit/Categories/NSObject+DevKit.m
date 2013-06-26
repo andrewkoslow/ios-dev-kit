@@ -6,6 +6,17 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_OBJECT_ENABLE + 0)
+
+
+#if !(DK_MACRO_ASSERT_ENABLE + 0)
+#error NSObject (DevKit) requires DK_MACRO_ASSERT_ENABLE = 1
+#endif
+
+
+#if (DK_MACRO_ASSERT_ENABLE + 0)
+
+
 #import "NSObject+DevKit.h"
 #import "DKAssert.h"
 
@@ -210,3 +221,9 @@
 
 
 @end
+
+
+#endif
+
+
+#endif

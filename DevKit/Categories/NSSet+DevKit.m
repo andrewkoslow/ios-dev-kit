@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_SET_ENABLE + 0)
+
+
 #import "NSSet+DevKit.h"
 
 
@@ -45,3 +48,6 @@
 
 
 @end
+
+
+#endif

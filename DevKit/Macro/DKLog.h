@@ -6,28 +6,18 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef DevKit_DKLog_h
-#define DevKit_DKLog_h
+#ifndef DK_MACRO_LOG
+#define DK_MACRO_LOG
 
 
-#ifndef DK_MACRO_LOG_ENABLE
-#define DK_MACRO_LOG_ENABLE 0
-#endif
-
-#ifndef DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE
-#define DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE 0
-#endif
-
-
-#ifndef DKLogConsoleLog
-#if DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE
-#define DKLogConsoleLog(format...) DKConsoleLog(format)
+#if (DK_MACRO_LOG_LOG_TO_DEBUGGER_CONSOLE + 0)
+#define ____DKConsoleLog(format...) DKConsoleLog(format)
 #else
-#define DKLogConsoleLog(...) do {} while (0)
-#endif
+#define ____DKConsoleLog(...) do {} while (0)
 #endif
 
 
+#define DKLog(variables...) DKLogSV(variables)
 #define DKLogM(message) DKLogSevMes(DK_MACRO_LOG_ENABLE, message)
 #define DKLogV(variables...) DKLogSevVars(DK_MACRO_LOG_ENABLE, variables)
 #define DKLogF() DKLogSevFunc(DK_MACRO_LOG_ENABLE)
@@ -36,28 +26,28 @@
 #define DKLogSV(variables...) DKLogSevSelVars(DK_MACRO_LOG_ENABLE, variables)
 
 
-#if DK_MACRO_LOG_ENABLE
+#if (DK_MACRO_LOG_ENABLE + 0)
 
 #define DKLogSevMes(severity, message) if (severity) {\
     NSLog(@"%@", message);\
-    DKLogConsoleLog(message);\
+    ____DKConsoleLog(message);\
 }
 
 #define DKLogSevVars(severity, variables...) if (severity) { ____DKLogSevVarsArgs(severity, ____DKLogArgCount(variables), variables); }
 
 #define DKLogSevFunc(severity) if (severity) {\
     NSLog(@"%s", __PRETTY_FUNCTION__);\
-    DKLogConsoleLog(@"%s", __PRETTY_FUNCTION__);\
+    ____DKConsoleLog(@"%s", __PRETTY_FUNCTION__);\
 }
 
 #define DKLogSevSel(severity) if (severity) {\
     NSLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
-    DKLogConsoleLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
+    ____DKConsoleLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
 }
 
 #define DKLogSevSelMes(severity, message) if (severity) {\
     NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
-    DKLogConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
+    ____DKConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
 }
 
 #define DKLogSevSelVars(severity, variables...) if (severity) { ____DKLogSevSelVarsArgs(severity, ____DKLogArgCount(variables), variables); }
@@ -70,7 +60,7 @@ do {\
     NSString *__argsString = [[NSArray arrayWithObjects:____DKLogVal ## ARG_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
     if (S) {\
         NSLog(@"%@", __argsString);\
-        DKLogConsoleLog(@"%@", __argsString);\
+        ____DKConsoleLog(@"%@", __argsString);\
     };\
 } while (0);
 
@@ -82,7 +72,7 @@ do {\
     NSString *__argsString = [[NSArray arrayWithObjects:____DKLogVal ## ARG_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
     if (S) {\
         NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
-        DKLogConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
+        ____DKConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
     };\
 } while (0);
 
@@ -139,12 +129,12 @@ do {\
 
 #else
 
-#define DKLogM(message) do {} while (0)
-#define DKLogV(variables...) do {} while (0)
-#define DKLogF() do {} while (0)
-#define DKLogS() do {} while (0)
-#define DKLogSM(message) do {} while (0)
-#define DKLogSV(variables...) do {} while (0)
+#define DKLogSevMes(DK_MACRO_LOG_ENABLE, message) do {} while (0)
+#define DKLogSevVars(DK_MACRO_LOG_ENABLE, variables) do {} while (0)
+#define DKLogSevFunc(DK_MACRO_LOG_ENABLE) do {} while (0)
+#define DKLogSevSel(DK_MACRO_LOG_ENABLE) do {} while (0)
+#define DKLogSevSelMes(DK_MACRO_LOG_ENABLE, message) do {} while (0)
+#define DKLogSevSelVars(DK_MACRO_LOG_ENABLE, variables) do {} while (0)
 
 #endif
 

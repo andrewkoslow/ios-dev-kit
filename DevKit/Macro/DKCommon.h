@@ -6,16 +6,11 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef DevKit_DKCommon_h
-#define DevKit_DKCommon_h
+#ifndef DK_MACRO_COMMON
+#define DK_MACRO_COMMON
 
 
-#ifndef DK_MACRO_COMMON_ENABLE
-#define DK_MACRO_COMMON_ENABLE 0
-#endif
-
-
-#if DK_MACRO_COMMON_ENABLE
+#if (DK_MACRO_COMMON_ENABLE + 0)
 
 #define UIUserInterfaceIdiomIsPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define UIUserInterfaceIdiomIsPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)

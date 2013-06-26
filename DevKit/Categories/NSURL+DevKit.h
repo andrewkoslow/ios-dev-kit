@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_URL_ENABLE + 0)
+
+
 #import <Foundation/Foundation.h>
 
 
@@ -14,3 +17,6 @@
 - (NSURL *)URLByAppendingQueryParameters:(NSDictionary *)parameters;
 
 @end
+
+
+#endif

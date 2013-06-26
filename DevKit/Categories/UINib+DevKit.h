@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_UI_NIB_ENABLE + 0)
+
+
 #import <UIKit/UIKit.h>
 
 
@@ -14,3 +17,6 @@
 - (id)instantiatedWithOwner:(id)owner objectOfClass:(Class)objectClass;
 
 @end
+
+
+#endif

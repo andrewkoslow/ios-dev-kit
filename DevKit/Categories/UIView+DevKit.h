@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_UI_VIEW_ENABLE + 0)
+
+
 #import <Foundation/Foundation.h>
 
 
@@ -37,3 +40,6 @@
 @property (assign) CGSize boundSize;
 
 @end
+
+
+#endif

@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_UI_DEVICE_ENABLE + 0)
+
+
 #import <UIKit/UIKit.h>
 
 
@@ -36,3 +39,6 @@ NS_INLINE DKSystemVersion DKSystemVersionMake(NSUInteger major, NSUInteger minor
 - (BOOL)systemVersionLowerThanOrEquals:(DKSystemVersion)version;
 
 @end
+
+
+#endif

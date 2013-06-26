@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_STRING_ENABLE + 0)
+
+
 #import <Foundation/Foundation.h>
 
 
@@ -18,3 +21,6 @@
 - (NSString *)sha256;
 
 @end
+
+
+#endif

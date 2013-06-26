@@ -7,20 +7,21 @@
 //
 
 
-#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
+#ifndef DKConsoleLog
+
+#if (DK_DEBUGGER_ENABLE + 0)
+#define DKConsoleLog(format...) [[DKDebuggerConsole sharedConsole] logMessage:[NSString stringWithFormat:format]]
+#else
+#define DKConsoleLog(format...) do {} while (0)
+#endif
+
+#endif
+
+
+#if (DK_DEBUGGER_ENABLE + 0)
 
 
 #import <Foundation/Foundation.h>
-
-
-#ifndef DK_DEBUGGER_CONSOLE_AUTO_CREATE_SHARED
-#define DK_DEBUGGER_CONSOLE_AUTO_CREATE_SHARED 1
-#endif
-
-
-#ifndef DK_DEBUGGER_CONSOLE_LOG_TO_FILE
-#define DK_DEBUGGER_CONSOLE_LOG_TO_FILE 0
-#endif
 
 
 UIKIT_EXTERN NSString *const DKDebuggerConsoleDidUpdateLogNotification;

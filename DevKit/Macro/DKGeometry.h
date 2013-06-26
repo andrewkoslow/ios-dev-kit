@@ -6,16 +6,11 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef DevKit_DKGeometry_h
-#define DevKit_DKGeometry_h
+#ifndef DK_MACRO_GEOMETRY
+#define DK_MACRO_GEOMETRY
 
 
-#ifndef DK_MACRO_GEOMETRY_ENABLE
-#define DK_MACRO_GEOMETRY_ENABLE 0
-#endif
-
-
-#if DK_MACRO_GEOMETRY_ENABLE
+#if (DK_MACRO_GEOMETRY_ENABLE + 0)
 
 NS_INLINE CGRect CGRectSetMinX(CGRect rect, CGFloat minX) {
     CGFloat delta = minX - CGRectGetMinX(rect);

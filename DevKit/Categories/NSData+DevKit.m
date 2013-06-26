@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_DATA_ENABLE + 0)
+
+
 #import "NSData+DevKit.h"
 
 
@@ -27,3 +30,6 @@
 
 
 @end
+
+
+#endif

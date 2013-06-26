@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_UI_VIEW_CONTROLLER_ENABLE + 0)
+
+
 #import <UIKit/UIKit.h>
 
 
@@ -16,3 +19,6 @@
 + (id)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 @end
+
+
+#endif

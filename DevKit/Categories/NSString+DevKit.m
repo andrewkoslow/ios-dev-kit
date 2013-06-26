@@ -6,10 +6,21 @@
 //  Copyright (c) 2013 Andrew Koslow. All rights reserved.
 //
 
+#if (DK_CATEGORIES_NS_STRING_ENABLE + 0)
+
+
+#if !(DK_CATEGORIES_NS_DATA_ENABLE + 0)
+#error NSString (DevKit) requires DK_CATEGORIES_NS_DATA_ENABLE = 1
+#endif
+
+
+#if (DK_CATEGORIES_NS_DATA_ENABLE + 0)
+
+
 #import "NSString+DevKit.h"
 #import "NSData+DevKit.h"
 #import <CommonCrypto/CommonHMAC.h>
-#include <stdlib.h>
+#import <stdlib.h>
 
 
 @implementation NSString (DevKit)
@@ -73,3 +84,9 @@
 
 
 @end
+
+
+#endif
+
+
+#endif

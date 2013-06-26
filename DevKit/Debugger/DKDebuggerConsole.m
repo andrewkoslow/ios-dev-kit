@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Andrew Koslow. All rights reserved.
 //
 
-#if defined(DK_DEBUGGER_ENABLE) && DK_DEBUGGER_ENABLE
+#if (DK_DEBUGGER_ENABLE + 0)
 
 
-#include <mach/mach.h>
-#include <pthread.h>
+#import <mach/mach.h>
+#import <pthread.h>
 #import "DKDebuggerConsole.h"
 
 
@@ -42,7 +42,7 @@ static __strong DKDebuggerConsole *sharedConsole = nil;
 
 
 + (void)initialize {
-#if DK_DEBUGGER_CONSOLE_AUTO_CREATE_SHARED
+#if (DK_DEBUGGER_CONSOLE_AUTO_CREATE_SHARED + 0)
     
     sharedConsole = [self new];
     
@@ -63,7 +63,7 @@ static __strong DKDebuggerConsole *sharedConsole = nil;
 - (id)init {
     if ((self = [super init])) {
         
-#if DK_DEBUGGER_CONSOLE_LOG_TO_FILE
+#if (DK_DEBUGGER_CONSOLE_LOG_TO_FILE + 0)
         _logToFile = YES;
 #endif
         _logFilePathGenerationBlock = ^(NSString *baseDirectoryPath) {

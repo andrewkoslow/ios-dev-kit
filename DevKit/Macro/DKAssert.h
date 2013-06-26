@@ -6,16 +6,11 @@
 //  Copyright (c) 2012 Andrew Koslow. All rights reserved.
 //
 
-#ifndef DevKit_DKAssert_h
-#define DevKit_DKAssert_h
+#ifndef DK_MACRO_ASSERT
+#define DK_MACRO_ASSERT
 
 
-#ifndef DK_MACRO_ASSERT_ENABLE
-#define DK_MACRO_ASSERT_ENABLE 0
-#endif
-
-
-#if DK_MACRO_ASSERT_ENABLE
+#if (DK_MACRO_ASSERT_ENABLE + 0)
 
 #define DKAssert(e) NSAssert(e, @#e)
 #define DKAssertNil(e) NSAssert(e == nil, @#e" == nil")
