@@ -15,12 +15,12 @@
 @interface NSArray (DevKit)
 
 - (id)firstObject;
-- (NSArray *)reversedArray;
-- (NSArray *)arrayByRemovingObject:(id)anObject;
-- (NSArray *)arrayByRemovingObjectsInArray:(NSArray *)objectsToRemove;
-- (NSArray *)arrayByIntersectingWithArray:(NSArray *)anotherArray;
-- (NSArray *)arrayOfObjectsOfClass:(Class)objectClass;
-- (NSArray *)arrayByPrependingObject:(id)anObject;
+- (instancetype)reversedArray;
+- (instancetype)arrayByRemovingObject:(id)anObject;
+- (instancetype)arrayByRemovingObjectsInArray:(NSArray *)objectsToRemove;
+- (instancetype)arrayByIntersectingWithArray:(NSArray *)anotherArray;
+- (instancetype)arrayOfObjectsOfClass:(Class)objectClass;
+- (instancetype)arrayByPrependingObject:(id)anObject;
 
 @end
 

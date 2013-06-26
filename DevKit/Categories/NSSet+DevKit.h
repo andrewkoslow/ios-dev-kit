@@ -14,10 +14,10 @@
 
 @interface NSSet (DevKit)
 
-- (NSSet *)setByRemovingObject:(id)anObject;
-- (NSSet *)setByRemovingObjectsInSet:(NSSet *)objectsToRemove;
-- (NSSet *)setByIntersectingWithSet:(NSSet *)anotherSet;
-- (NSSet *)setOfObjectsOfClass:(Class)objectClass;
+- (instancetype)setByRemovingObject:(id)anObject;
+- (instancetype)setByRemovingObjectsInSet:(NSSet *)objectsToRemove;
+- (instancetype)setByIntersectingWithSet:(NSSet *)anotherSet;
+- (instancetype)setOfObjectsOfClass:(Class)objectClass;
 
 @end
 

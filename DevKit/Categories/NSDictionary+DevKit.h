@@ -14,7 +14,7 @@
 
 @interface NSDictionary (DevKit)
 
-- (id)dictionaryBySettingObject:(id)object forKey:(id)key;
+- (instancetype)dictionaryBySettingObject:(id)object forKey:(id)key;
 - (id)objectOfClass:(Class)objectClass forKey:(id)key;
 - (NSArray *)arrayOfObjectsOfClass:(Class)objectClass forKey:(id)key;
 - (NSDictionary *)dictionaryForKey:(id)key;

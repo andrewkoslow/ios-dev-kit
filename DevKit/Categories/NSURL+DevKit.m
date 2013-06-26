@@ -24,7 +24,7 @@
 @implementation NSURL (DevKit)
 
 
-- (NSURL *)URLByAppendingQueryParameters:(NSDictionary *)parameters {
+- (instancetype)URLByAppendingQueryParameters:(NSDictionary *)parameters {
     if (parameters.count == 0) return self;
     
     NSMutableArray *parameterStringParts = [NSMutableArray new];
@@ -41,7 +41,7 @@
     NSString *parameterString = [parameterStringParts componentsJoinedByString:@"&"];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", self.absoluteString, ((self.query.length > 0) ? @"&" : @"?"), parameterString];
     
-    return [NSURL URLWithString:URLString];
+    return [[self class] URLWithString:URLString];
 }
 
 

@@ -22,39 +22,39 @@
 }
 
 
-- (NSArray *)reversedArray {
-    return self.reverseObjectEnumerator.allObjects;
+- (instancetype)reversedArray {
+    return [[self class] arrayWithArray:self.reverseObjectEnumerator.allObjects];
 }
 
 
-- (NSArray *)arrayByPrependingObject:(id)anObject {
-    return [[NSArray arrayWithObject:anObject] arrayByAddingObjectsFromArray:self];
+- (instancetype)arrayByPrependingObject:(id)anObject {
+    return [[[self class] arrayWithObject:anObject] arrayByAddingObjectsFromArray:self];
 }
 
 
-- (NSArray *)arrayByRemovingObject:(id)anObject {
+- (instancetype)arrayByRemovingObject:(id)anObject {
 	NSMutableArray *array = [self mutableCopy];
 	[array removeObject:anObject];
 	return [array copy];
 }
 
 
-- (NSArray *)arrayByRemovingObjectsInArray:(NSArray *)objectsToRemove {
+- (instancetype)arrayByRemovingObjectsInArray:(NSArray *)objectsToRemove {
 	NSMutableArray *array = [self mutableCopy];
 	[array removeObjectsInArray:objectsToRemove];
 	return [array copy];
 }
 
 
-- (NSArray *)arrayByIntersectingWithArray:(NSArray *)anotherArray {
+- (instancetype)arrayByIntersectingWithArray:(NSArray *)anotherArray {
 	NSMutableSet *tempSet = [[NSMutableSet alloc] initWithArray:self];
 	[tempSet intersectSet:[[NSSet alloc] initWithArray:anotherArray]];
-	return tempSet.allObjects;
+	return [[self class] arrayWithArray:tempSet.allObjects];
 }
 
 
-- (NSArray *)arrayOfObjectsOfClass:(Class)objectClass {
-	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:self.count];
+- (instancetype)arrayOfObjectsOfClass:(Class)objectClass {
+	NSMutableArray *array = [[[self class] new] mutableCopy];
 	
 	for (id object in self) {
 		if ([object isKindOfClass:objectClass]) [array addObject:object];

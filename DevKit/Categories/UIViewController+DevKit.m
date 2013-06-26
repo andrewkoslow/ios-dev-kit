@@ -29,12 +29,12 @@
 @implementation UIViewController (DevKit)
 
 
-+ (id)viewController {
++ (instancetype)viewController {
     return [[self alloc] initWithNibName:nil bundle:nil];
 }
 
 
-+ (id)viewControllerForCurrentInterfaceIdiom {
++ (instancetype)viewControllerForCurrentInterfaceIdiom {
     static NSString *suffix = @"Controller";
     NSString *nibName = NSStringFromClass(self);
     if ([nibName hasSuffix:suffix] && nibName.length > suffix.length) nibName = [nibName substringToIndex:(nibName.length - suffix.length)];
@@ -43,7 +43,7 @@
 }
 
 
-+ (id)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
++ (instancetype)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     NSString *classNameSuffix = (UIUserInterfaceIdiomIsPad ? @"Pad" : @"Phone");
     NSString *className = NSStringFromClass(self);
     className = [className stringByAppendingString:classNameSuffix];

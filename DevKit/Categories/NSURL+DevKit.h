@@ -14,7 +14,7 @@
 
 @interface NSURL (DevKit)
 
-- (NSURL *)URLByAppendingQueryParameters:(NSDictionary *)parameters;
+- (instancetype)URLByAppendingQueryParameters:(NSDictionary *)parameters;
 
 @end
 

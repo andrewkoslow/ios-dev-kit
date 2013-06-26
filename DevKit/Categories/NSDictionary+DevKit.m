@@ -24,6 +24,13 @@
 @implementation NSDictionary (DevKit)
 
 
+- (instancetype)dictionaryBySettingObject:(id)object forKey:(id)key {
+	NSMutableDictionary *dictionary = [self mutableCopy];
+    [dictionary setValue:object forKey:key];
+	return [dictionary copy];
+}
+
+
 - (id)objectOfClass:(Class)objectClass forKey:(id)key {
     id object = self[key];
     if ([object isKindOfClass:objectClass] == NO) object = nil;
@@ -58,13 +65,6 @@
 
 - (BOOL)boolForKey:(id)key {
     return [[self numberForKey:key] boolValue];
-}
-
-
-- (id)dictionaryBySettingObject:(id)object forKey:(id)key {
-	NSMutableDictionary *dictionary = [self mutableCopy];
-    [dictionary setValue:object forKey:key];
-	return [dictionary copy];
 }
 
 

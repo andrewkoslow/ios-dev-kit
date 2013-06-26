@@ -15,29 +15,29 @@
 @implementation NSSet (DevKit)
 
 
-- (NSSet *)setByRemovingObject:(id)anObject {
+- (instancetype)setByRemovingObject:(id)anObject {
 	NSMutableSet *set = [self mutableCopy];
 	[set removeObject:anObject];
 	return [set copy];
 }
 
 
-- (NSSet *)setByRemovingObjectsInSet:(NSSet *)objectsToRemove {
+- (instancetype)setByRemovingObjectsInSet:(NSSet *)objectsToRemove {
 	NSMutableSet *set = [self mutableCopy];
 	[set minusSet:objectsToRemove];
 	return [set copy];
 }
 
 
-- (NSSet *)setByIntersectingWithSet:(NSSet *)anotherSet {
+- (instancetype)setByIntersectingWithSet:(NSSet *)anotherSet {
 	NSMutableSet *set = [self mutableCopy];
 	[set intersectSet:anotherSet];
 	return [set copy];
 }
 
 
-- (NSSet *)setOfObjectsOfClass:(Class)objectClass {
-	NSMutableSet *set = [[NSMutableSet alloc] initWithCapacity:self.count];
+- (instancetype)setOfObjectsOfClass:(Class)objectClass {
+	NSMutableSet *set = [[[self class] new] mutableCopy];
 	
 	for (id object in self) {
 		if ([object isKindOfClass:objectClass]) [set addObject:object];
