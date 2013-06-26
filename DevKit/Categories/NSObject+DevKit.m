@@ -33,11 +33,6 @@
 @implementation NSObject (DevKit)
 
 
-+ (id)object {
-    return [self new];
-}
-
-
 #pragma mark - Key Path Observation
 
 - (void)observeKeyPaths:(NSString *)keyPath, ... {
