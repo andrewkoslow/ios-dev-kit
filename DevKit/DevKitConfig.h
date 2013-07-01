@@ -98,6 +98,19 @@
 #endif
 
 
+#ifndef DK_RUNTIME_ENABLE
+#define DK_RUNTIME_ENABLE                                   DK_ENABLE
+#endif
+
+#ifndef DK_RUNTIME_EXTENSION_ENABLE
+#define DK_RUNTIME_EXTENSION_ENABLE                         DK_RUNTIME_ENABLE
+#endif
+
+#ifndef DK_RUNTIME_MOCK_ENABLE
+#define DK_RUNTIME_MOCK_ENABLE                              DK_RUNTIME_ENABLE
+#endif
+
+
 #ifndef DK_DEBUGGER_ENABLE
 #define DK_DEBUGGER_ENABLE                                  DK_ENABLE
 #endif

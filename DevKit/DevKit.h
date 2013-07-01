@@ -10,4 +10,5 @@
 
 #import "DKMacro.h"
 #import "DKCategories.h"
+#import "DKRuntime.h"
 #import "DKDebugger.h"
