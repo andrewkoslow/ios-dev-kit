@@ -44,7 +44,7 @@
 
 
 + (instancetype)viewControllerForCurrentInterfaceIdiomWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    NSString *classNameSuffix = (UIUserInterfaceIdiomIsPad ? @"Pad" : @"Phone");
+    NSString *classNameSuffix = (DKUserInterfaceIdiomIsPad ? @"Pad" : @"Phone");
     NSString *className = NSStringFromClass(self);
     className = [className stringByAppendingString:classNameSuffix];
     

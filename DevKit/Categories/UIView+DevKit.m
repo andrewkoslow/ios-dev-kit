@@ -32,7 +32,7 @@
 
 
 - (void)setWidth:(CGFloat)width {
-    self.frame = CGRectSetWidth(self.frame, width);
+    self.frame = DKRectSetWidth(self.frame, width);
 }
 
 
@@ -42,7 +42,7 @@
 
 
 - (void)setHeight:(CGFloat)height {
-    self.frame = CGRectSetHeight(self.frame, height);
+    self.frame = DKRectSetHeight(self.frame, height);
 }
 
 
@@ -52,7 +52,7 @@
 
 
 - (void)setLeft:(CGFloat)left {
-    self.frame = CGRectSetLeft(self.frame, left);
+    self.frame = DKRectSetLeft(self.frame, left);
 }
 
 
@@ -62,7 +62,7 @@
 
 
 - (void)setTop:(CGFloat)top {
-    self.frame = CGRectSetTop(self.frame, top);
+    self.frame = DKRectSetTop(self.frame, top);
 }
 
 
@@ -72,7 +72,7 @@
 
 
 - (void)setRight:(CGFloat)right {
-    self.frame = CGRectSetRight(self.frame, right);
+    self.frame = DKRectSetRight(self.frame, right);
 }
 
 
@@ -82,7 +82,7 @@
 
 
 - (void)setBottom:(CGFloat)bottom {
-    self.frame = CGRectSetBottom(self.frame, bottom);
+    self.frame = DKRectSetBottom(self.frame, bottom);
 }
 
 
@@ -92,7 +92,7 @@
 
 
 - (void)setMinX:(CGFloat)minX {
-    self.frame = CGRectSetMinX(self.frame, minX);
+    self.frame = DKRectSetMinX(self.frame, minX);
 }
 
 
@@ -102,7 +102,7 @@
 
 
 - (void)setMinY:(CGFloat)minY {
-    self.frame = CGRectSetMinY(self.frame, minY);
+    self.frame = DKRectSetMinY(self.frame, minY);
 }
 
 
@@ -112,7 +112,7 @@
 
 
 - (void)setMaxX:(CGFloat)maxX {
-    self.frame = CGRectSetMaxX(self.frame, maxX);
+    self.frame = DKRectSetMaxX(self.frame, maxX);
 }
 
 
@@ -122,7 +122,7 @@
 
 
 - (void)setMaxY:(CGFloat)maxY {
-    self.frame = CGRectSetMaxY(self.frame, maxY);
+    self.frame = DKRectSetMaxY(self.frame, maxY);
 }
 
 
@@ -132,7 +132,7 @@
 
 
 - (void)setMidX:(CGFloat)midX {
-    self.frame = CGRectSetMidX(self.frame, midX);
+    self.frame = DKRectSetMidX(self.frame, midX);
 }
 
 
@@ -142,7 +142,7 @@
 
 
 - (void)setMidY:(CGFloat)midY {
-    self.frame = CGRectSetMidY(self.frame, midY);
+    self.frame = DKRectSetMidY(self.frame, midY);
 }
 
 
@@ -152,7 +152,7 @@
 
 
 - (void)setOrigin:(CGPoint)origin {
-    self.frame = CGRectSetOrigin(self.frame, origin);
+    self.frame = DKRectSetOrigin(self.frame, origin);
 }
 
 
@@ -162,7 +162,7 @@
 
 
 - (void)setSize:(CGSize)size {
-    self.frame = CGRectSetSize(self.frame, size);
+    self.frame = DKRectSetSize(self.frame, size);
 }
 
 
@@ -174,7 +174,7 @@
 
 
 - (void)setBoundWidth:(CGFloat)width {
-    self.bounds = CGRectSetWidth(self.bounds, width);
+    self.bounds = DKRectSetWidth(self.bounds, width);
 }
 
 
@@ -184,7 +184,7 @@
 
 
 - (void)setBoundHeight:(CGFloat)height {
-    self.bounds = CGRectSetHeight(self.bounds, height);
+    self.bounds = DKRectSetHeight(self.bounds, height);
 }
 
 
@@ -194,7 +194,7 @@
 
 
 - (void)setBoundLeft:(CGFloat)boundLeft {
-    self.bounds = CGRectSetLeft(self.bounds, boundLeft);
+    self.bounds = DKRectSetLeft(self.bounds, boundLeft);
 }
 
 
@@ -204,7 +204,7 @@
 
 
 - (void)setBoundTop:(CGFloat)boundTop {
-    self.bounds = CGRectSetTop(self.bounds, boundTop);
+    self.bounds = DKRectSetTop(self.bounds, boundTop);
 }
 
 
@@ -214,7 +214,7 @@
 
 
 - (void)setBoundRight:(CGFloat)boundRight {
-    self.bounds = CGRectSetRight(self.bounds, boundRight);
+    self.bounds = DKRectSetRight(self.bounds, boundRight);
 }
 
 
@@ -224,7 +224,7 @@
 
 
 - (void)setBoundBottom:(CGFloat)boundBottom {
-    self.bounds = CGRectSetBottom(self.bounds, boundBottom);
+    self.bounds = DKRectSetBottom(self.bounds, boundBottom);
 }
 
 
@@ -234,7 +234,7 @@
 
 
 - (void)setBoundMinX:(CGFloat)minX {
-    self.bounds = CGRectSetMinX(self.bounds, minX);
+    self.bounds = DKRectSetMinX(self.bounds, minX);
 }
 
 
@@ -244,7 +244,7 @@
 
 
 - (void)setBoundMinY:(CGFloat)minY {
-    self.bounds = CGRectSetMinY(self.bounds, minY);
+    self.bounds = DKRectSetMinY(self.bounds, minY);
 }
 
 
@@ -254,7 +254,7 @@
 
 
 - (void)setBoundMaxX:(CGFloat)maxX {
-    self.bounds = CGRectSetMaxX(self.bounds, maxX);
+    self.bounds = DKRectSetMaxX(self.bounds, maxX);
 }
 
 
@@ -264,7 +264,7 @@
 
 
 - (void)setBoundMaxY:(CGFloat)maxY {
-    self.bounds = CGRectSetMaxY(self.bounds, maxY);
+    self.bounds = DKRectSetMaxY(self.bounds, maxY);
 }
 
 
@@ -274,7 +274,7 @@
 
 
 - (void)setBoundMidX:(CGFloat)midX {
-    self.bounds = CGRectSetMidX(self.bounds, midX);
+    self.bounds = DKRectSetMidX(self.bounds, midX);
 }
 
 
@@ -284,7 +284,7 @@
 
 
 - (void)setBoundMidY:(CGFloat)midY {
-    self.bounds = CGRectSetMidY(self.bounds, midY);
+    self.bounds = DKRectSetMidY(self.bounds, midY);
 }
 
 
@@ -294,7 +294,7 @@
 
 
 - (void)setBoundOrigin:(CGPoint)origin {
-    self.bounds = CGRectSetOrigin(self.bounds, origin);
+    self.bounds = DKRectSetOrigin(self.bounds, origin);
 }
 
 
@@ -304,7 +304,7 @@
 
 
 - (void)setBoundSize:(CGSize)size {
-    self.bounds = CGRectSetSize(self.bounds, size);
+    self.bounds = DKRectSetSize(self.bounds, size);
 }
 
 

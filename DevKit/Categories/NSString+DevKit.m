@@ -18,9 +18,9 @@
 
 
 #import "NSString+DevKit.h"
-#import "NSData+DevKit.h"
 #import <CommonCrypto/CommonHMAC.h>
 #import <stdlib.h>
+#import "NSData+DevKit.h"
 
 
 @implementation NSString (DevKit)

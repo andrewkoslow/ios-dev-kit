@@ -9,9 +9,9 @@
 #if (DK_DEBUGGER_ENABLE + 0)
 
 
+#import "DKDebuggerConsole.h"
 #import <mach/mach.h>
 #import <pthread.h>
-#import "DKDebuggerConsole.h"
 
 
 NSString *const DKDebuggerConsoleDidUpdateLogNotification = @"DKDebuggerConsoleDidUpdateLogNotification";
