@@ -67,7 +67,7 @@
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     uint8_t digest[CC_SHA1_DIGEST_LENGTH] = {0};
     
-    CC_SHA1(data.bytes, data.length, digest);
+    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
     
     return [data hexadecimalString];
 }
@@ -77,7 +77,7 @@
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     uint8_t digest[CC_SHA256_DIGEST_LENGTH] = {0};
     
-    CC_SHA256(data.bytes, data.length, digest);
+    CC_SHA256(data.bytes, (unsigned int)data.length, digest);
     
     return [data hexadecimalString];
 }

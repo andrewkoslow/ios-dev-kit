@@ -108,8 +108,8 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), CGRect) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromCGRect(*(CGRect *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), NSRange) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromRange(*(NSRange *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), UIEdgeInsets) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromUIEdgeInsets(*(UIEdgeInsets *)__tmp_val_ptr_ ## n)]\
-: (__builtin_types_compatible_p(__typeof(v), NSUInteger) ? [NSString stringWithFormat:@"%s %u", #v, *(NSUInteger *)__tmp_val_ptr_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %d", #v, *(NSInteger *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), NSUInteger) ? [NSString stringWithFormat:@"%s %lu", #v, *(NSUInteger *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %li", #v, *(NSInteger *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), CGFloat) ? [NSString stringWithFormat:@"%s %f", #v, *(CGFloat *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), int) ? [NSString stringWithFormat:@"%s %d", #v, *(int *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), uint) ? [NSString stringWithFormat:@"%s %u", #v, *(uint *)__tmp_val_ptr_ ## n]\
