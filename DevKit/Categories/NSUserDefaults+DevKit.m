@@ -20,7 +20,7 @@
     extensionOrNil = (extensionOrNil ? extensionOrNil : @"plist");
     
     NSURL *defaultUserDefaultsFileURL = [[NSBundle mainBundle] URLForResource:userDefaultsFileOrNil withExtension:extensionOrNil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfURL:defaultUserDefaultsFileURL]];
+    [self registerDefaults:[NSDictionary dictionaryWithContentsOfURL:defaultUserDefaultsFileURL]];
 }
 
 
