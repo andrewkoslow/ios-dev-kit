@@ -33,6 +33,11 @@
 @implementation NSObject (DevKit)
 
 
++ (instancetype)from:(id)object {
+    return ([object isKindOfClass:self] ? object : nil);
+}
+
+
 #pragma mark - Key Path Observation
 
 - (void)observeKeyPaths:(NSString *)keyPath, ... {

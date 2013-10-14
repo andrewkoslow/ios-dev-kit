@@ -14,6 +14,7 @@
 
 @interface NSObject (DevKit)
 
++ (instancetype)from:(id)object;
 - (void)observeKeyPaths:(NSString *)keyPath, ... NS_REQUIRES_NIL_TERMINATION;
 - (void)stopObservingKeyPaths:(NSString *)keyPath, ... NS_REQUIRES_NIL_TERMINATION;
 - (void)observeNotificationsNames:(NSString *)name, ... NS_REQUIRES_NIL_TERMINATION;
