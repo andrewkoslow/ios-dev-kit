@@ -109,11 +109,17 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), NSRange) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromRange(*(NSRange *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), UIEdgeInsets) ? [NSString stringWithFormat:@"%s %@", #v, NSStringFromUIEdgeInsets(*(UIEdgeInsets *)__tmp_val_ptr_ ## n)]\
 : (__builtin_types_compatible_p(__typeof(v), NSUInteger) ? [NSString stringWithFormat:@"%s %lu", #v, *(unsigned long *)__tmp_val_ptr_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %li", #v, *(long *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), NSInteger) ? [NSString stringWithFormat:@"%s %ld", #v, *(long *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), CFIndex) ? [NSString stringWithFormat:@"%s %ld", #v, *(long *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), CGFloat) ? [NSString stringWithFormat:@"%s %f", #v, *(CGFloat *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), signed short int) ? [NSString stringWithFormat:@"%s %hd", #v, *(signed short int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unsigned short int) ? [NSString stringWithFormat:@"%s %hd", #v, *(unsigned short int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), char) ? [NSString stringWithFormat:@"%s %c", #v, *(char *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), signed char) ? [NSString stringWithFormat:@"%s %c", #v, *(signed char *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unsigned char) ? [NSString stringWithFormat:@"%s %c", #v, *(unsigned char *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), unichar) ? [NSString stringWithFormat:@"%s %C", #v, *(unichar *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), int) ? [NSString stringWithFormat:@"%s %d", #v, *(int *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), uint) ? [NSString stringWithFormat:@"%s %u", #v, *(uint *)__tmp_val_ptr_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), char) ? [NSString stringWithFormat:@"%s %c", #v, *(char *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), unsigned int) ? [NSString stringWithFormat:@"%s %u", #v, *(unsigned int *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), long int) ? [NSString stringWithFormat:@"%s %ld", #v, *(long int *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), unsigned long int) ? [NSString stringWithFormat:@"%s %lu", #v, *(unsigned long int *)__tmp_val_ptr_ ## n]\
@@ -125,7 +131,7 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), void *) ? [NSString stringWithFormat:@"%s %p", #v, *(void **)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)__tmp_val_ptr_ ## n) ? @"YES" : @"NO")]\
 : @"<Unknown Type>"\
-))))))))))))))))))))))))
+))))))))))))))))))))))))))))))
 
 #else
 
