@@ -114,6 +114,7 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), CGFloat) ? [NSString stringWithFormat:@"%s %f", #v, *(CGFloat *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), signed short int) ? [NSString stringWithFormat:@"%s %hd", #v, *(signed short int *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), unsigned short int) ? [NSString stringWithFormat:@"%s %hd", #v, *(unsigned short int *)__tmp_val_ptr_ ## n]\
+: (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)__tmp_val_ptr_ ## n) ? @"YES" : @"NO")]\
 : (__builtin_types_compatible_p(__typeof(v), char) ? [NSString stringWithFormat:@"%s %c", #v, *(char *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), signed char) ? [NSString stringWithFormat:@"%s %c", #v, *(signed char *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), unsigned char) ? [NSString stringWithFormat:@"%s %c", #v, *(unsigned char *)__tmp_val_ptr_ ## n]\
@@ -129,7 +130,6 @@ do {\
 : (__builtin_types_compatible_p(__typeof(v), double) ? [NSString stringWithFormat:@"%s %f", #v, *(double *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), long double) ? [NSString stringWithFormat:@"%s %Lf", #v, *(long double *)__tmp_val_ptr_ ## n]\
 : (__builtin_types_compatible_p(__typeof(v), void *) ? [NSString stringWithFormat:@"%s %p", #v, *(void **)__tmp_val_ptr_ ## n]\
-: (__builtin_types_compatible_p(__typeof(v), BOOL) ? [NSString stringWithFormat:@"%s %@", #v, ((*(BOOL *)__tmp_val_ptr_ ## n) ? @"YES" : @"NO")]\
 : @"<Unknown Type>"\
 ))))))))))))))))))))))))))))))
 
