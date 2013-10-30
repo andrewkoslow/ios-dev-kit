@@ -14,6 +14,7 @@
 
 @interface NSDictionary (DevKit)
 
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (instancetype)dictionaryBySettingObject:(id)object forKey:(id)key;
 - (id)objectOfClass:(Class)objectClass forKey:(id)key;
 - (NSArray *)arrayOfObjectsOfClass:(Class)objectClass forKey:(id)key;

@@ -24,6 +24,41 @@
 @implementation NSDictionary (DevKit)
 
 
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level {
+    NSString *padding = [@"" stringByPaddingToLength:(level * 4) withString:@" " startingAtIndex:0];
+    NSString *valuePadding = [@"" stringByPaddingToLength:((level + 1) * 4) withString:@" " startingAtIndex:0];
+    
+    NSString *output = (level ? @"" : padding);
+    output = [output stringByAppendingString:@"{\n"];
+    
+    NSInteger count = self.count;
+    NSInteger index = 0;
+    
+    for (id key in self) {
+        id object = self[key];
+        
+        NSString *keyDescription = nil;
+        if ([key respondsToSelector:@selector(descriptionWithLocale:indent:)]) keyDescription = [key descriptionWithLocale:locale indent:(level + 1)];
+        else if ([key respondsToSelector:@selector(descriptionWithLocale:)]) keyDescription = [key descriptionWithLocale:locale];
+        else keyDescription = [key description];
+        
+        NSString *objectDescription = nil;
+        if ([object respondsToSelector:@selector(descriptionWithLocale:indent:)]) objectDescription = [object descriptionWithLocale:locale indent:(level + 1)];
+        else if ([object respondsToSelector:@selector(descriptionWithLocale:)]) objectDescription = [object descriptionWithLocale:locale];
+        else objectDescription = [object description];
+        
+        output = [output stringByAppendingFormat:@"%@%@ = %@", valuePadding, keyDescription, objectDescription];
+        output = [output stringByAppendingString:(((index + 1) < count) ? @",\n" : @"\n")];
+        
+        index++;
+    }
+    
+    output = [output stringByAppendingFormat:@"%@}", padding];
+    
+    return output;
+}
+
+
 - (instancetype)dictionaryBySettingObject:(id)object forKey:(id)key {
 	NSMutableDictionary *dictionary = [self mutableCopy];
     [dictionary setValue:object forKey:key];

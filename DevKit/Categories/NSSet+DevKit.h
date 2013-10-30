@@ -14,6 +14,7 @@
 
 @interface NSSet (DevKit)
 
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (instancetype)setByRemovingObject:(id)anObject;
 - (instancetype)setByRemovingObjectsInSet:(NSSet *)objectsToRemove;
 - (instancetype)setByIntersectingWithSet:(NSSet *)anotherSet;

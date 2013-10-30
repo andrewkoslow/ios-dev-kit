@@ -19,3 +19,4 @@
 #import "NSUserDefaults+DevKit.h"
 #import "NSSet+DevKit.h"
 #import "NSData+DevKit.h"
+#import "NSOrderedSet+DevKit.h"

@@ -14,6 +14,7 @@
 
 @interface NSArray (DevKit)
 
+- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;
 - (id)firstObject;
 - (instancetype)reversedArray;
 - (instancetype)arrayByRemovingObject:(id)anObject;
