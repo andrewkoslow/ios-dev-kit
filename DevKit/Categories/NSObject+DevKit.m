@@ -33,7 +33,7 @@
 @implementation NSObject (DevKit)
 
 
-+ (instancetype)from:(id)object {
++ (instancetype)of:(id)object {
     return ([object isKindOfClass:self] ? object : nil);
 }
 
