@@ -38,6 +38,11 @@
 }
 
 
++ (instancetype)from:(id)object {
+    return ([object isKindOfClass:self] ? object : [self new]);
+}
+
+
 #pragma mark - Key Path Observation
 
 - (void)observeKeyPaths:(NSString *)keyPath, ... {
