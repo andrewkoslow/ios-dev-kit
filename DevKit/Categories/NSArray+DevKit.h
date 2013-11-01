@@ -22,6 +22,12 @@
 - (instancetype)arrayByIntersectingWithArray:(NSArray *)anotherArray;
 - (instancetype)arrayOfObjectsOfClass:(Class)objectClass;
 - (instancetype)arrayByPrependingObject:(id)anObject;
+- (id)objectOfClass:(Class)objectClass atIndex:(NSUInteger)index;
+- (NSDictionary *)dictionaryAtIndex:(NSUInteger)index;
+- (NSArray *)arrayAtIndex:(NSUInteger)index;
+- (NSString *)stringAtIndex:(NSUInteger)index;
+- (NSNumber *)numberAtIndex:(NSUInteger)index;
+- (BOOL)boolAtIndex:(NSUInteger)index;
 
 @end
 

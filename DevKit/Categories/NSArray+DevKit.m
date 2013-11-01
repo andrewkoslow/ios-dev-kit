@@ -92,6 +92,38 @@
 }
 
 
+- (id)objectOfClass:(Class)objectClass atIndex:(NSUInteger)index {
+    id object = self[index];
+    if ([object isKindOfClass:objectClass] == NO) object = nil;
+    return object;
+}
+
+
+- (NSDictionary *)dictionaryAtIndex:(NSUInteger)index {
+    return [self objectOfClass:[NSDictionary class] atIndex:index];
+}
+
+
+- (NSArray *)arrayAtIndex:(NSUInteger)index {
+    return [self objectOfClass:[NSArray class] atIndex:index];
+}
+
+
+- (NSString *)stringAtIndex:(NSUInteger)index {
+    return [self objectOfClass:[NSString class] atIndex:index];
+}
+
+
+- (NSNumber *)numberAtIndex:(NSUInteger)index {
+    return [self objectOfClass:[NSNumber class] atIndex:index];
+}
+
+
+- (BOOL)boolAtIndex:(NSUInteger)index {
+    return [[self numberAtIndex:index] boolValue];
+}
+
+
 @end
 
 
