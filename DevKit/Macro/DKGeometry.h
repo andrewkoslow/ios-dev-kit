@@ -99,7 +99,7 @@ NS_INLINE CGRect DKRectSetRight(CGRect rect, CGFloat right) {
 
 
 NS_INLINE CGRect DKRectSetBottom(CGRect rect, CGFloat bottom) {
-    CGFloat delta = bottom - CGRectGetMaxX(rect);
+    CGFloat delta = bottom - CGRectGetMaxY(rect);
     rect.origin.y += delta;
     
     return rect;
