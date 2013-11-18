@@ -16,9 +16,12 @@
 void DKReplaceInstanceMethod(Class targetClass, SEL targetSelector, Class implementationClass, SEL implementationSelector) {
     Method targetMethod = class_getInstanceMethod(targetClass, targetSelector);
     Method implementationMethod = class_getInstanceMethod(implementationClass, implementationSelector);
-	
-	method_exchangeImplementations(targetMethod, implementationMethod);
-	class_addMethod(targetClass, implementationSelector, method_getImplementation(implementationMethod), method_getTypeEncoding(implementationMethod));
+    
+    BOOL added = class_addMethod(targetClass, targetSelector, method_getImplementation(implementationMethod), method_getTypeEncoding(implementationMethod));
+    
+    if (added == NO) {
+        method_exchangeImplementations(targetMethod, implementationMethod);
+    }
 }
 
 
