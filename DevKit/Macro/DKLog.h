@@ -136,11 +136,11 @@ do {\
 #else
 
 #define DKLogSevMes(DK_MACRO_LOG_ENABLE, message) do {} while (0)
-#define DKLogSevVars(DK_MACRO_LOG_ENABLE, variables) do {} while (0)
+#define DKLogSevVars(DK_MACRO_LOG_ENABLE, variables...) do {} while (0)
 #define DKLogSevFunc(DK_MACRO_LOG_ENABLE) do {} while (0)
 #define DKLogSevSel(DK_MACRO_LOG_ENABLE) do {} while (0)
 #define DKLogSevSelMes(DK_MACRO_LOG_ENABLE, message) do {} while (0)
-#define DKLogSevSelVars(DK_MACRO_LOG_ENABLE, variables) do {} while (0)
+#define DKLogSevSelVars(DK_MACRO_LOG_ENABLE, variables...) do {} while (0)
 
 #endif
 
