@@ -41,13 +41,13 @@
 }
 
 #define DKLogSevSel(severity) if (severity) {\
-    NSLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
-    ____DKConsoleLog(@"%@[%@ %@]", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd));\
+    NSLog(@"%s (%@)", __PRETTY_FUNCTION__, NSStringFromClass([self class]));\
+    ____DKConsoleLog(@"%s (%@)", __PRETTY_FUNCTION__, NSStringFromClass([self class]));\
 }
 
 #define DKLogSevSelMes(severity, message) if (severity) {\
-    NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
-    ____DKConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), message);\
+    NSLog(@"%s (%@) --- %@", __PRETTY_FUNCTION__, NSStringFromClass([self class]), message);\
+    ____DKConsoleLog(@"%s (%@) --- %@", __PRETTY_FUNCTION__, NSStringFromClass([self class]), message);\
 }
 
 #define DKLogSevSelVars(severity, variables...) if (severity) { ____DKLogSevSelVarsArgs(severity, ____DKLogArgCount(variables), variables); }
@@ -71,8 +71,8 @@ do {\
     ____DKLogTmp ## ARG_COUNT(__VA_ARGS__);\
     NSString *__argsString = [[NSArray arrayWithObjects:____DKLogVal ## ARG_COUNT(__VA_ARGS__), nil] componentsJoinedByString:@", "];\
     if (S) {\
-        NSLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
-        ____DKConsoleLog(@"%@[%@ %@] --- %@", ((self == self.class) ? @"+" : @"-"), NSStringFromClass([self class]), NSStringFromSelector(_cmd), __argsString);\
+        NSLog(@"%s (%@) --- %@", __PRETTY_FUNCTION__, NSStringFromClass([self class]), __argsString);\
+        ____DKConsoleLog(@"%s (%@) --- %@", __PRETTY_FUNCTION__, NSStringFromClass([self class]), __argsString);\
     };\
 } while (0);
 
